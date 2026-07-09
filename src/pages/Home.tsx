@@ -42,22 +42,22 @@ const EXPERIENCES = [
 const COMPETENCIES = [
   {
     title: "1. 문제를 재정의합니다",
-    body: "요구사항을 곧바로 기획서나 할 일 목록으로 옮기지 않습니다. 먼저 '왜 이 문제가 생겼는지' 그 뒤에 어떤 구조와 운영 리스크가 숨어 있는지 봅니다. 단순한 개선 요청처럼 보여도 그 이면에서 거래 구조·책임 주체·운영 기준이 바뀐다면 문제 자체를 다시 정의합니다.",
+    body: "요구사항을 곧바로 기획서나 할 일 목록으로 옮기지 않습니다. 먼저 '왜 이 문제가 생겼는지' 그 뒤에 어떤 구조와 운영 리스크가 숨어 있는지 봅니다. 단순한 개선 요청도 거래 구조·책임 주체·운영 기준이 바뀐다면 문제 자체를 다시 정의합니다.",
     emoji: redefineEmoji,
   },
   {
     title: "2. 생각을 구조화합니다",
-    body: "복잡한 문제를 큰 덩어리로 두지 않습니다. 누가 무엇을 처리하는지, 어떤 흐름에서 예외가 생기는지, 무엇을 기준으로 판단해야 하는지로 잘게 나눕니다. 팀이 같은 그림을 보고 논의할 수 있는 구조로 명확히 정리합니다.",
+    body: "복잡한 문제를 잘게 쪼개서 생각합니다. 누가 무엇을 처리하는지, 어떤 흐름에서 예외가 생기는지, 무엇을 기준으로 판단해야 하는지 구조화합니다. 이를 기반으로 팀이 같은 그림을 보고 논의할 수 있는 구조로 명확히 정리합니다.",
     emoji: structureEmoji,
   },
   {
     title: "3. 이해관계자와 조율합니다",
-    body: "요구가 서로 부딪힐 때 목소리 큰 쪽을 따르지 않습니다. 대표·거래처·운영팀·재무팀의 엇갈리는 요구와 제약을 같은 테이블에 올려놓고 '무엇을 기준으로 나눌지'를 함께 맞춥니다. 필요하다면 결정의 근거와 감수할 리스크까지 문서로 남겨 나중에 다시 흔들리지 않도록 기준을 세웁니다.",
+    body: "요구가 서로 달라도 풀어갈 수 있는 방법을 찾습니다. 대표·거래처·운영팀·재무팀의 엇갈리는 요구와 제약을 '어떤 기준으로 나누고 결정할지'를 고민합니다. 의사결정 근거와 우려되는 리스크까지 문서로 남겨 나중에 다시 흔들리지 않도록 기준을 세웁니다.",
     emoji: alignEmoji,
   },
   {
     title: "4. AI를 적극 활용합니다",
-    body: "필요한 도구가 없다고 기다리지 않습니다. 반복 업무나 데이터 정합성 문제를 발견하면 AI와 노코드 툴을 활용해 실무에 바로 적용할 수 있는 자동화 흐름을 직접 만듭니다.",
+    body: "필요한 도구가 없다고 기다리지 않습니다. 반복 업무나 데이터 정합성 등 풀 수 있는 문제를 발견하면 AI와 노코드 툴을 활용해 실무에 바로 적용할 수 있는 자동화 흐름을 직접 만듭니다.",
     emoji: aiEmoji,
   },
 ];
@@ -65,13 +65,13 @@ const COMPETENCIES = [
 const TOOLS_PRIMARY = [
   { id: "notion",       label: "Notion",        desc: "요구사항 정의 · 스펙 문서화" },
   { id: "claude",       label: "Claude",         desc: "기획 가속화 · 툴 개발" },
-  { id: "googlesheets", label: "Google Sheets",  desc: "데이터 분석 · QA 이슈 관리" },
-  { id: "slack",        label: "Slack",          desc: "외주·유관부서 커뮤니케이션" },
+  { id: "googlesheets", label: "Google Sheets",  desc: "프로젝트 관리 · QA 이슈 관리" },
+  { id: "slack",        label: "Slack",          desc: "외주 커뮤니케이션" },
 ];
 
 const TOOLS_SECONDARY = [
   { id: "powerpoint", label: "PowerPoint", desc: "보고서 · 발표 자료" },
-  { id: "figma",      label: "Figma",      desc: "화면 검토 · 레퍼런스 분석" },
+  { id: "figma",      label: "Figma",      desc: "화면 설계·검토 · 레퍼런스 분석" },
 ];
 
 export default function Home() {
@@ -88,8 +88,8 @@ export default function Home() {
           <span className="hero-accent">PM 박건주</span>입니다.
         </h1>
         <p className="text-body" style={{ color: "var(--color-ink-muted-80)", maxWidth: 640, marginTop: 24 }}>
-          단순 기능 기획을 넘어 비즈니스 모델이 전환될 때 회원·상품·주문·결제·정산 전 사이클의
-          운영 기준을 처음부터 잡아왔습니다. 문제의 본질과 그 안에 숨은 리스크를 먼저 보고
+          단순 기능을 기획하는 것을 넘어 비즈니스 모델에 따른 회원·상품·주문·결제·정산 전 사이클의
+          운영 기준을 처음부터 잡았습니다. 문제의 본질과 그 안에 숨은 리스크를 먼저 보고
           실제 사용자가 업무를 끝까지 처리할 수 있는 수준까지 설계합니다.
         </p>
       </Tile>
@@ -101,7 +101,7 @@ export default function Home() {
             <span className="hero-project-btn__text">
               <span className="text-body-strong">B2B몰 1P → 3P 플랫폼 전환</span>
               <span className="text-caption hero-project-btn__desc">
-                회원·상품·주문·결제·정산 전 사이클 재설계 · 8개 섹션
+                회원·상품·주문·결제·정산 전 사이클 재설계
               </span>
             </span>
             <span className="hero-project-btn__arrow">→</span>
@@ -110,7 +110,7 @@ export default function Home() {
             <span className="hero-project-btn__text">
               <span className="text-body-strong">서브 프로젝트 3건</span>
               <span className="text-caption hero-project-btn__desc">
-                바코드 매칭 자동화 · 라이브커머스 · 복지플랫폼 마이페이지
+                바코드 매칭 자동화 · 라이브커머스 기획 · 마이페이지 개편
               </span>
             </span>
             <span className="hero-project-btn__arrow">→</span>
@@ -123,16 +123,15 @@ export default function Home() {
         <div className="about-grid">
           <div className="about-grid__desc">
             <p className="text-body" style={{ color: "var(--color-body-muted)" }}>
-              B2B 커머스 플랫폼에서 PM으로 일하며 회원·상품·주문·결제·정산까지 이어지는
-              운영 기준을 처음부터 설계했습니다. 기능이 화면에서 동작하는 데서 멈추지 않고
-              거래처·공급사·운영자가 실제 업무를 끝까지 처리할 수 있는 수준까지 만드는 것을
-              목표로 합니다.
+              B2B 커머스 플랫폼에서 PM으로 일하며 회원·상품·주문·결제·정산까지 운영 기준을
+              0 to 1로 설계했습니다. 거래처·공급사·운영자가 실제 업무를 끝까지 처리할 수
+              있는 수준까지 만드는 것을 목표로 합니다.
             </p>
             <p className="text-body" style={{ color: "var(--color-body-muted)", marginTop: 14 }}>
-              특히, 결제·정산처럼 한 번 어긋나면 회계·법무 문제로 번지는 영역에서 사용자 화면과
+              특히, 결제·정산처럼 어긋나면 회계·법무 문제로 번지는 영역에서 사용자 화면과
               관리자(백오피스)를 함께 설계하고 정책·데이터·정산 흐름이 서로 어긋나지 않도록
-              기준을 잡아왔습니다. 문제를 정의할 때는 거래처 설문조사 등을 통해 정성 VOC와
-              실제 주문·물량 데이터를 함께 근거로 씁니다.
+              기준을 잡았습니다. 문제를 정의할 때는 거래처 설문조사 등을 통한 정성적 VOC와
+              실제 주문·물량 데이터를 함께 근거로 활용합니다.
             </p>
             <p className="text-body" style={{ color: "var(--color-body-muted)", marginTop: 14 }}>
               필요할 때는 있는 자원으로 빠르게 실행하기도 합니다. 개발 리소스를 최소화하여

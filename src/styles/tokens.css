@@ -75,6 +75,21 @@ ul {
 }
 
 /* ---- typography scale ---- */
+.text-hero-display,
+.text-display-lg,
+.text-display-md,
+.text-section-heading,
+.text-lead,
+.text-tagline,
+.text-body-strong,
+.text-body,
+.text-caption,
+.text-caption-strong,
+.text-fine-print {
+  /* lets a literal newline in a JSX string prop render as a line break,
+     without needing manual <br /> tags in inline content */
+  white-space: pre-line;
+}
 .text-hero-display {
   font-family: var(--font-display);
   font-size: 56px;
