@@ -9,6 +9,7 @@ export default function Tile({
   role,
   footer,
   children,
+  className,
 }: {
   variant?: "light" | "parchment" | "dark";
   eyebrow?: string;
@@ -17,9 +18,10 @@ export default function Tile({
   role?: string[];
   footer?: string;
   children?: ReactNode;
+  className?: string;
 }) {
   return (
-    <section className={`tile tile--${variant}`}>
+    <section className={`tile tile--${variant}${className ? ` ${className}` : ""}`}>
       <div className="tile__inner">
         {eyebrow && <p className="tile__eyebrow text-caption-strong">{eyebrow}</p>}
         {title && <h2 className="text-section-heading">{title}</h2>}

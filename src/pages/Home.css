@@ -1,36 +1,182 @@
-.home-links {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--color-hairline);
+/* ── Hero ── */
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.28px;
+}
+.hero-headline__lead {
+  display: inline-block;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.hero-accent {
+  color: var(--color-primary);
+}
+
+/* Tighten the section padding where two light tiles sit back to back */
+.tile--compact-bottom {
+  padding-bottom: 24px;
+}
+.tile--compact-top {
+  padding-top: 24px;
+}
+
+/* ── Hero Project Buttons ── */
+.hero-project-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.hero-project-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex: 1 1 280px;
+  padding: 16px 22px;
   border: 1px solid var(--color-hairline);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.hero-project-btn__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hero-project-btn__desc {
+  color: var(--color-ink-muted-48);
+}
+.hero-project-btn:hover {
+  background: var(--color-canvas-parchment);
+  border-color: var(--color-primary);
+}
+.hero-project-btn__arrow {
+  color: var(--color-primary);
+}
+
+/* ── About ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.about-grid__desc {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Experience ── */
+.exp-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-hairline);
+}
+.exp-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--color-hairline);
+}
+.exp-meta {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2px;
+}
+.exp-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.exp-education {
+  margin-top: 40px;
+}
+.exp-education__label {
+  color: var(--color-ink-muted-48);
+  margin-bottom: 4px;
+}
+@media (max-width: 580px) {
+  .exp-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
+/* ── Competencies ── */
+.competency-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+.competency-card {
+  position: relative;
+  background: var(--color-canvas);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-md);
+  padding: 32px;
   overflow: hidden;
 }
-@media (max-width: 700px) {
-  .home-links {
+.competency-card__emoji {
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+.competency-card > p {
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 560px) {
+  .competency-grid {
     grid-template-columns: 1fr;
   }
 }
 
-.home-links__card {
-  background: var(--color-canvas);
-  padding: 32px;
+/* ── Tools ── */
+.tools-section {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  text-decoration: none;
-  color: inherit;
+  gap: 32px;
 }
-.home-links__card:hover {
-  background: var(--color-canvas-parchment);
+.tools-group__label {
+  color: var(--color-body-muted);
+  margin-bottom: 14px;
 }
-
-.home-links__eyebrow {
-  color: var(--color-primary);
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
-
-.home-links__cta {
-  margin-top: 8px;
-  color: var(--color-primary);
+@media (max-width: 560px) {
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.tool-chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-md);
+}
+.tool-chip--secondary {
+  background: rgba(255, 255, 255, 0.03);
+}
+.tool-chip__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
