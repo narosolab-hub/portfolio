@@ -1,0 +1,36 @@
+.home-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--color-hairline);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+@media (max-width: 700px) {
+  .home-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+.home-links__card {
+  background: var(--color-canvas);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+.home-links__card:hover {
+  background: var(--color-canvas-parchment);
+}
+
+.home-links__eyebrow {
+  color: var(--color-primary);
+}
+
+.home-links__cta {
+  margin-top: 8px;
+  color: var(--color-primary);
+}

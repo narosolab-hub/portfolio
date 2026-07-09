@@ -1,0 +1,94 @@
+.tile {
+  width: 100%;
+  padding: var(--space-section) 24px;
+}
+@media (max-width: 640px) {
+  .tile {
+    padding: var(--space-section-sm) 20px;
+  }
+}
+
+.tile--light {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+}
+.tile--parchment {
+  background: var(--color-canvas-parchment);
+  color: var(--color-ink);
+}
+.tile--dark {
+  background: var(--color-surface-tile-1);
+  color: var(--color-body-on-dark);
+}
+
+.tile__inner {
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.tile__eyebrow {
+  font-family: var(--font-text);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.224px;
+  color: var(--color-primary);
+}
+.tile--dark .tile__eyebrow {
+  color: var(--color-primary-on-dark);
+}
+
+.tile__subcopy {
+  max-width: 100%;
+}
+
+.tile__content {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.tile--dark .tile__subcopy {
+  color: var(--color-body-muted);
+}
+.tile--light .tile__subcopy,
+.tile--parchment .tile__subcopy {
+  color: var(--color-ink-muted-80);
+}
+
+.tile__footer {
+  padding-top: 28px;
+  border-top: 1px solid var(--color-hairline);
+}
+.tile--dark .tile__footer {
+  border-top-color: rgba(255, 255, 255, 0.16);
+}
+
+.tile__role {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--color-ink-muted-48);
+}
+.tile--dark .tile__role {
+  color: var(--color-body-muted);
+}
+.tile__role li {
+  padding-left: 14px;
+  position: relative;
+}
+.tile__role li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+}
+.tile--dark .tile__role li::before {
+  color: var(--color-primary-on-dark);
+}

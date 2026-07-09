@@ -1,0 +1,27 @@
+.global-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 44px;
+  background: var(--color-surface-black);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  font-family: var(--font-text);
+  font-size: 12px;
+  letter-spacing: -0.12px;
+}
+
+.global-nav__link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+}
+.global-nav__link:hover {
+  color: #fff;
+}
+.global-nav__link--current {
+  color: #fff;
+  font-weight: 600;
+}

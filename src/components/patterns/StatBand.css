@@ -1,0 +1,30 @@
+.stat-band {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.stat-band__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-band__value {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -0.374px;
+  color: var(--color-primary);
+}
+.stat-band--dark .stat-band__value {
+  color: var(--color-primary-on-dark);
+}
+
+.stat-band__label {
+  font-size: 14px;
+  color: var(--color-ink-muted-48);
+}
+.stat-band--dark .stat-band__label {
+  color: var(--color-body-muted);
+}

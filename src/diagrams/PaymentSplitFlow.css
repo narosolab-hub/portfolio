@@ -1,0 +1,242 @@
+.pay-split {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.pay-split__tag {
+  align-self: flex-start;
+  color: var(--color-primary-on-dark);
+  margin-bottom: 16px;
+}
+
+.pay-split__root {
+  background: var(--color-surface-tile-2);
+  color: #fff;
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  text-align: center;
+}
+.pay-split__root strong {
+  display: block;
+  font-size: 15px;
+}
+.pay-split__root span {
+  font-size: 11px;
+  color: var(--color-body-muted);
+}
+
+.pay-split__branch-line {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.pay-split__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+@media (max-width: 700px) {
+  .pay-split__cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pay-split__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.pay-split__col-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.pay-split__col-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-primary-on-dark);
+}
+
+.pay-split__col-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+}
+
+.pay-split__step {
+  width: 100%;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--color-body-muted);
+}
+
+.pay-split__connector {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.pay-split__splits {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.pay-split__split-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  text-align: center;
+}
+
+.pay-split__split-label {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.pay-split__split-value {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pay-split__split-note {
+  font-size: 10px;
+  color: var(--color-body-muted);
+}
+
+.pay-split__split-item--revenue {
+  background: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  color: #fff;
+}
+.pay-split__split-item--revenue .pay-split__split-label {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.pay-split__split-item--payout {
+  background: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.32);
+  color: var(--color-body-muted);
+}
+.pay-split__split-item--payout .pay-split__split-label {
+  color: var(--color-body-muted);
+}
+.pay-split__split-item--payout .pay-split__split-value {
+  color: #fff;
+}
+
+.pay-split__split-item--placeholder {
+  visibility: hidden;
+}
+
+.pay-split__merge-svg {
+  width: 100%;
+  height: 32px;
+  overflow: visible;
+}
+.pay-split__merge-svg path {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 1.5px;
+}
+@media (max-width: 700px) {
+  .pay-split__merge-svg {
+    display: none;
+  }
+  .pay-split__final {
+    margin-top: 20px;
+  }
+}
+
+.pay-split__final {
+  background: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  text-align: center;
+  max-width: 420px;
+}
+.pay-split__final strong {
+  display: block;
+  font-size: 15px;
+  color: #fff;
+}
+.pay-split__final span {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.pay-split__footer {
+  margin-top: 20px;
+  color: var(--color-body-muted);
+  text-align: center;
+  max-width: 560px;
+}
+.pay-split__footer strong {
+  color: #fff;
+}
+
+.pay-split__review {
+  margin-top: 24px;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  padding-top: 16px;
+}
+
+.pay-split__review-label {
+  display: block;
+  color: var(--color-primary-on-dark);
+  margin-bottom: 10px;
+}
+
+.pay-split__review-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+@media (max-width: 700px) {
+  .pay-split__review-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pay-split__review-item {
+  position: relative;
+  padding-left: 14px;
+  color: var(--color-body-muted);
+  line-height: 1.5;
+}
+.pay-split__review-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}

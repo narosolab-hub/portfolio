@@ -1,0 +1,54 @@
+.ctable {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-family: var(--font-text);
+}
+
+.ctable th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-ink-muted-48);
+  padding: 0 16px 12px;
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.ctable td {
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 16px;
+  border-bottom: 1px solid var(--color-hairline);
+  vertical-align: top;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.ctable tr:last-child td {
+  border-bottom: none;
+}
+
+.ctable td:first-child {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.ctable td.ctable__after {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.ctable--dark th {
+  color: var(--color-body-muted);
+  border-bottom-color: rgba(255, 255, 255, 0.16);
+}
+.ctable--dark td {
+  color: var(--color-body-muted);
+  border-bottom-color: rgba(255, 255, 255, 0.16);
+}
+.ctable--dark td:first-child {
+  color: #fff;
+}
+.ctable--dark td.ctable__after {
+  color: var(--color-primary-on-dark);
+}

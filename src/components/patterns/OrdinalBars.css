@@ -1,0 +1,87 @@
+.obars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.obars__row {
+  display: grid;
+  grid-template-columns: 88px 1fr 40px;
+  align-items: center;
+  gap: 12px;
+}
+
+.obars__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+.obars--dark .obars__label {
+  color: #fff;
+}
+
+.obars__track {
+  height: 10px;
+  background: var(--color-canvas-parchment);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.obars--dark .obars__track {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.obars__fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-pill);
+}
+
+.obars__count {
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+}
+.obars--dark .obars__count {
+  color: #fff;
+}
+
+.obars--vertical {
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+.obars--vertical .obars__label,
+.obars--vertical .obars__count {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.obars__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.obars__col-track {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 44px;
+  flex-shrink: 0;
+  height: 140px;
+  background: var(--color-canvas-parchment);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.obars--dark .obars__col-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.obars--vertical .obars__fill {
+  width: 100%;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
