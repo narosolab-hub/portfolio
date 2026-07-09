@@ -1,0 +1,34 @@
+.project-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px 0;
+  border-top: 1px solid var(--color-hairline);
+  border-bottom: 1px solid var(--color-hairline);
+}
+@media (max-width: 700px) {
+  .project-meta {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.project-meta--dark {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.project-meta__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.project-meta__k {
+  color: var(--color-ink-muted-48);
+}
+.project-meta--dark .project-meta__k {
+  color: var(--color-body-muted);
+}
+.project-meta__v {
+  color: var(--color-ink);
+}
+.project-meta--dark .project-meta__v {
+  color: #fff;
+}

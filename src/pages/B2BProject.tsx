@@ -1,6 +1,7 @@
 import GlobalNav from "../components/GlobalNav";
 import Tile from "../components/Tile";
 import ComparisonTable from "../components/patterns/ComparisonTable";
+import ProjectMeta from "../components/patterns/ProjectMeta";
 import CartFlowShowcase from "../diagrams/CartFlowShowcase";
 import E2EVerificationFlow from "../diagrams/E2EVerificationFlow";
 import ExpansionTimeline from "../diagrams/ExpansionTimeline";
@@ -18,7 +19,7 @@ export default function B2BProject() {
       <GlobalNav />
 
       <Tile variant="light">
-        <p className="tile__eyebrow text-caption-strong">CASE STUDY 01 — B2B 플랫폼 전환</p>
+        <p className="tile__eyebrow text-caption-strong">MAIN PROJECT 01 — B2B 플랫폼 전환</p>
         <h1 className="text-section-heading" style={{ maxWidth: 640 }}>
           B2B 플랫폼으로 전환하며 중개 판매 구조에 맞춰 전 사이클의 운영 기준을 다시 세웠습니다.
         </h1>
@@ -26,6 +27,14 @@ export default function B2BProject() {
           자사몰(1P)에서 플랫폼(3P)으로 넘어오는 과정에서 요구사항과 비즈니스 맥락을 바탕으로 문제를
           정의하고 풀어간 세부 케이스들을 담았습니다.
         </p>
+        <ProjectMeta
+          items={[
+            { k: "프로젝트 기간", v: "2025.08 ~ 진행 중\n2026.09 베타 오픈 목표" },
+            { k: "담당 역할", v: "요구사항 정의, 정책 · 구조 설계,\n외주 커뮤니케이션, QA 기준 수립" },
+            { k: "팀 구성", v: "플랫폼기획팀 · 기획 전담 1인\n협업: 외주 개발사, 운영 · 재무팀" },
+            { k: "기여도", v: "기획 90%" },
+          ]}
+        />
       </Tile>
 
       <Tile

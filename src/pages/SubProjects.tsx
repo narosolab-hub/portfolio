@@ -1,6 +1,7 @@
 import { useState } from "react";
 import GlobalNav from "../components/GlobalNav";
 import Tile from "../components/Tile";
+import ProjectMeta from "../components/patterns/ProjectMeta";
 import StepFlow from "../components/patterns/StepFlow";
 import Lightbox from "../components/Lightbox";
 import uploadScreen from "../assets/barcode-tool/upload-screen.png";
@@ -9,25 +10,6 @@ import flowLogicScreen from "../assets/live-commerce/flow-logic.png";
 import mypageFeatureImprovement from "../assets/welfare-mypage/feature-improvement.png";
 import wireframeSpec from "../assets/welfare-mypage/wireframe-spec.png";
 import "./SubProjects.css";
-
-function ProjectMeta({
-  items,
-  dark = false,
-}: {
-  items: { k: string; v: string }[];
-  dark?: boolean;
-}) {
-  return (
-    <div className={`project-meta${dark ? " project-meta--dark" : ""}`}>
-      {items.map((item) => (
-        <div className="project-meta__item" key={item.k}>
-          <span className="project-meta__k text-caption">{item.k}</span>
-          <span className="project-meta__v text-caption-strong">{item.v}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
 
 function AsIsList({
   rows,
