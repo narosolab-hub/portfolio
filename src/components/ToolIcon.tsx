@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import claudeIcon from "../assets/claude-ai-icon.webp";
 import notionIcon from "../assets/notion.png";
 import slackIcon from "../assets/slack.jpeg";
@@ -72,7 +73,7 @@ function FigmaSvg({ color }: { color: string }) {
   );
 }
 
-const SVG_MAP: Record<ToolId, (fg: string) => JSX.Element> = {
+const SVG_MAP: Record<ToolId, (fg: string) => ReactElement> = {
   notion:       (fg) => <NotionSvg color={fg} />,
   claude:       (_fg) => <img src={claudeIcon} width={28} height={28} style={{ objectFit: "cover", borderRadius: 6, display: "block" }} alt="Claude" />,
   googlesheets: (fg) => <GoogleSheetsSvg color={fg} />,
