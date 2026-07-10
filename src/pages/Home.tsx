@@ -88,9 +88,9 @@ export default function Home() {
           <span className="hero-accent">PM 박건주</span>입니다.
         </h1>
         <p className="text-body" style={{ color: "var(--color-ink-muted-80)", maxWidth: 640, marginTop: 24 }}>
-          단순 기능을 기획하는 것을 넘어 비즈니스 모델에 따른 회원·상품·주문·결제·정산 전 사이클의
-          운영 기준을 처음부터 잡았습니다. 문제의 본질과 그 안에 숨은 리스크를 먼저 보고
-          실제 사용자가 업무를 끝까지 처리할 수 있는 수준까지 설계합니다.
+          단순 기능을 기획하는 것을 넘어 비즈니스 모델에 따른 회원·상품·주문·결제·정산 등 커머스 전 영역의
+          운영 기준을 설계했습니다. 문제의 본질과 그 안에 숨은 리스크를 먼저 보고
+          실제 사용자의 편의성까지 고려하여 기획합니다.
         </p>
       </Tile>
 
