@@ -44,10 +44,8 @@ const columns: {
 const reviewItems = [
   "PG 매출 신고 — 1P 매출·3P 정산대금·수수료 구분 자료 필요",
   "공급사 정산대금 — 수수료 제외 금액 정산 기준",
-  "자사 수수료 — 별도 매출 항목으로 분리",
   "후불결제포인트 — 1P 상품 전용으로 제한",
   "세금계산서·증빙 — 발행 방식 별도 검토",
-  "재무팀 운영 경험 — 중개 판매 정산 첫 사례",
 ];
 
 export default function PaymentSplitFlow() {

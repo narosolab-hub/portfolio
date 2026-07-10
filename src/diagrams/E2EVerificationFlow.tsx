@@ -2,11 +2,11 @@ import "./E2EVerificationFlow.css";
 
 const steps = [
   { step: "회원가입/입점", risk: "권한, 승인 상태" },
-  { step: "상품 등록", risk: "공급사별 상품 등록 기준" },
-  { step: "주문/결제", risk: "1P/3P 혼합 주문, 후불결제 제한" },
-  { step: "발주/출고", risk: "공급사별 발주, 부분 출고" },
-  { step: "정산/세무", risk: "정산 산정 기준, 매출 구분" },
-  { step: "클레임", risk: "부분 취소, 교환/반품 상태값" },
+  { step: "상품 등록", risk: "상품 등록, 승인, 노출 체계" },
+  { step: "주문/결제", risk: "일괄 결제, 1P/3P 혼합 주문" },
+  { step: "발주/출고", risk: "공급사별 발주, 송장 등록, 부분 출고" },
+  { step: "클레임", risk: "예외 케이스, 취소/교환/반품 상태값" },
+  { step: "정산/세무", risk: "정산 산정 기준, 매출 자료" },
 ];
 
 export default function E2EVerificationFlow() {
