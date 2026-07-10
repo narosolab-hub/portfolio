@@ -315,7 +315,7 @@ export default function SubProjects() {
           </p>
         </div>
         <div className="sub-project__section">
-          <SectionLabel>To-Be — 구현 기능</SectionLabel>
+          <SectionLabel>구현 기능</SectionLabel>
           <AsIsList
             rows={[
               {
@@ -338,7 +338,7 @@ export default function SubProjects() {
             {
               src: mypageFeatureImprovement,
               caption:
-                "AS-IS → TO-BE — 메뉴 구조화, 핵심 정보 상단 배치, 복지포인트·주문내역 상세 랜딩까지 실제 개편 전후 비교",
+                "구현 기능 — 메뉴 구조화, 핵심 정보 상단 배치, 복지포인트·주문내역 상세 랜딩까지 실제 구현 화면",
             },
           ]}
         />
