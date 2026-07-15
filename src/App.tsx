@@ -4,7 +4,7 @@ import B2BProject from "./pages/B2BProject";
 import SubProjects from "./pages/SubProjects";
 import { VARIANTS } from "./variants";
 
-// 공고별 버전: /for/<slug> — VARIANTS에 등록된 slug만 열리고,
+// 공고별 버전: /<slug> — VARIANTS에 등록된 slug만 열리고,
 // 없는 slug는 기본 페이지로 돌려보냅니다.
 function VariantHome() {
   const { slug } = useParams();
@@ -17,9 +17,9 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/for/:slug" element={<VariantHome />} />
       <Route path="/b2b-platform" element={<B2BProject />} />
       <Route path="/sub-projects" element={<SubProjects />} />
+      <Route path="/:slug" element={<VariantHome />} />
     </Routes>
   );
 }
