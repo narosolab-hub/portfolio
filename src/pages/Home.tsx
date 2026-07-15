@@ -1,3 +1,4 @@
+import { Fragment, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import GlobalNav from "../components/GlobalNav";
 import Tile from "../components/Tile";
@@ -6,7 +7,31 @@ import redefineEmoji from "../assets/competency-emoji/redefine.png";
 import structureEmoji from "../assets/competency-emoji/structure.png";
 import alignEmoji from "../assets/competency-emoji/align.png";
 import aiEmoji from "../assets/competency-emoji/ai.png";
+import { DEFAULT_ORDER, type SectionId, type Variant } from "../variants";
 import "./Home.css";
+
+// Hero / Projects 섹션의 기본 문구. variant가 있으면 해당 항목만 덮어씁니다.
+const HERO_DEFAULT = {
+  eyebrow: "프로덕트 기획자 PORTFOLIO",
+  lead: "복잡한 운영 구조를 기획으로 풀어내는",
+  accent: "PM 박건주",
+  tail: "입니다.",
+  body:
+    "단순 기능을 기획하는 것을 넘어 비즈니스 모델에 따른 회원·상품·주문·결제·정산 등 커머스 전 영역의 " +
+    "운영 기준을 설계했습니다. 문제의 본질과 그 안에 숨은 리스크를 먼저 보고 " +
+    "실제 사용자의 편의성까지 고려하여 기획합니다.",
+};
+
+const PROJECTS_DEFAULT = {
+  b2b: {
+    title: "B2B몰 1P → 3P 플랫폼 전환",
+    desc: "회원·상품·주문·결제·정산 전 사이클 재설계",
+  },
+  sub: {
+    title: "서브 프로젝트 3건",
+    desc: "바코드 매칭 자동화 · 라이브커머스 기획 · 마이페이지 개편",
+  },
+};
 
 const EXPERIENCES = [
   {
@@ -74,51 +99,60 @@ const TOOLS_SECONDARY = [
   { id: "figma",      label: "Figma",      desc: "화면 설계·검토 · 레퍼런스 분석" },
 ];
 
-export default function Home() {
-  return (
-    <div>
-      <GlobalNav />
+export default function Home({ variant }: { variant?: Variant }) {
+  // 기본 문구에 variant override를 병합
+  const hero = { ...HERO_DEFAULT, ...variant?.hero };
+  const projects = {
+    b2b: { ...PROJECTS_DEFAULT.b2b, ...variant?.projects?.b2b },
+    sub: { ...PROJECTS_DEFAULT.sub, ...variant?.projects?.sub },
+  };
 
-      {/* ─── Hero ─── */}
+  // 각 섹션을 id로 조회할 수 있게 렌더 함수로 분리
+  const sections: Record<SectionId, () => ReactNode> = {
+    // ─── Hero ───
+    hero: () => (
       <Tile variant="light" className="tile--compact-bottom">
-        <p className="tile__eyebrow text-caption-strong">프로덕트 기획자 PORTFOLIO</p>
+        <p className="tile__eyebrow text-caption-strong">{hero.eyebrow}</p>
         <h1 className="hero-headline" style={{ maxWidth: 640 }}>
-          <span className="hero-headline__lead">복잡한 운영 구조를 기획으로 풀어내는</span>
+          <span className="hero-headline__lead">{hero.lead}</span>
           <br />
-          <span className="hero-accent">PM 박건주</span>입니다.
+          <span className="hero-accent">{hero.accent}</span>
+          {hero.tail}
         </h1>
         <p className="text-body" style={{ color: "var(--color-ink-muted-80)", maxWidth: 640, marginTop: 24 }}>
-          단순 기능을 기획하는 것을 넘어 비즈니스 모델에 따른 회원·상품·주문·결제·정산 등 커머스 전 영역의
-          운영 기준을 설계했습니다. 문제의 본질과 그 안에 숨은 리스크를 먼저 보고
-          실제 사용자의 편의성까지 고려하여 기획합니다.
+          {hero.body}
         </p>
       </Tile>
+    ),
 
-      {/* ─── Project Buttons ─── */}
+    // ─── Project Buttons ───
+    projects: () => (
       <Tile variant="light" eyebrow="PROJECTS" className="tile--compact-top">
         <div className="hero-project-buttons">
           <Link className="hero-project-btn" to="/b2b-platform">
             <span className="hero-project-btn__text">
-              <span className="text-body-strong">B2B몰 1P → 3P 플랫폼 전환</span>
+              <span className="text-body-strong">{projects.b2b.title}</span>
               <span className="text-caption hero-project-btn__desc">
-                회원·상품·주문·결제·정산 전 사이클 재설계
+                {projects.b2b.desc}
               </span>
             </span>
             <span className="hero-project-btn__arrow">→</span>
           </Link>
           <Link className="hero-project-btn" to="/sub-projects">
             <span className="hero-project-btn__text">
-              <span className="text-body-strong">서브 프로젝트 3건</span>
+              <span className="text-body-strong">{projects.sub.title}</span>
               <span className="text-caption hero-project-btn__desc">
-                바코드 매칭 자동화 · 라이브커머스 기획 · 마이페이지 개편
+                {projects.sub.desc}
               </span>
             </span>
             <span className="hero-project-btn__arrow">→</span>
           </Link>
         </div>
       </Tile>
+    ),
 
-      {/* ─── About ─── */}
+    // ─── About ───
+    about: () => (
       <Tile variant="dark" eyebrow="ABOUT">
         <div className="about-grid">
           <div className="about-grid__desc">
@@ -141,8 +175,10 @@ export default function Home() {
           </div>
         </div>
       </Tile>
+    ),
 
-      {/* ─── How I Work ─── */}
+    // ─── How I Work ───
+    how: () => (
       <Tile variant="parchment" eyebrow="HOW I WORK" title="일하는 방식">
         <div className="competency-grid">
           {COMPETENCIES.map((c) => (
@@ -161,8 +197,10 @@ export default function Home() {
           ))}
         </div>
       </Tile>
+    ),
 
-      {/* ─── Experience ─── */}
+    // ─── Experience ───
+    experience: () => (
       <Tile variant="light" eyebrow="EXPERIENCE" title="이력">
         <div className="exp-list">
           {EXPERIENCES.map((e) => (
@@ -226,8 +264,10 @@ export default function Home() {
           </div>
         </div>
       </Tile>
+    ),
 
-      {/* ─── Tools ─── */}
+    // ─── Tools ───
+    tools: () => (
       <Tile variant="dark" eyebrow="TOOLS" title="툴">
         <div className="tools-section">
           <div className="tools-group">
@@ -271,6 +311,20 @@ export default function Home() {
           </div>
         </div>
       </Tile>
+    ),
+  };
+
+  // variant가 지정한 순서/숨김을 적용 (없으면 기본 순서·전체 노출)
+  const order = variant?.order ?? DEFAULT_ORDER;
+  const hidden = new Set(variant?.hidden ?? []);
+  const visible = order.filter((id) => !hidden.has(id));
+
+  return (
+    <div>
+      <GlobalNav />
+      {visible.map((id) => (
+        <Fragment key={id}>{sections[id]()}</Fragment>
+      ))}
     </div>
   );
 }
