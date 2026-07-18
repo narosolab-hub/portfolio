@@ -53,6 +53,11 @@ export interface Variant {
     body?: string;
   };
 
+  /** About 섹션 문단 override — 문단 배열로 넣으면 기본 3문단을 통째로 대체 */
+  about?: {
+    paragraphs?: string[];
+  };
+
   /** Projects 버튼 문구 override */
   projects?: {
     b2b?: { title?: string; desc?: string };
@@ -76,6 +81,35 @@ export const VARIANTS: Record<string, Variant> = {
     projects: {
       b2b: {
         desc: "이해관계자가 얽힌 운영 구조를 0 to 1로 재설계",
+      },
+    },
+  },
+
+  // ── 번개장터 (Product Manager, Core Product) ────────────────────────
+  // 공고: 탐색 → 등록 → 거래 → 정산 전체 여정 설계 / 기능·정책·시스템의
+  // 위계를 이해하는 구조적 사고.
+  // 메인 프로젝트가 베타 오픈 전 미완성이므로 '가설→검증→개선(성과)' 대신
+  // '흐름을 구조로 바라본다'는 구조 설계 강점으로 포지셔닝합니다.
+  "bgzt": {
+    company: "번개장터 (Product Manager, Core Product)",
+    order: ["hero", "about", "projects", "how", "experience", "tools"],
+    hero: {
+      lead: "탐색부터 정산까지, 거래 흐름을 구조로 설계하는",
+      // body 생략 → 헤드라인만 노출하는 슬림 Hero. 소개는 아래 About이 전담.
+    },
+    about: {
+      paragraphs: [
+        "커머스 전 영역에 걸쳐 탐색부터 거래 완료까지 이어지는 흐름을 기능·정책·시스템 구조로 바라보는 Product Manager입니다.",
+        "B2B 커머스 플랫폼을 1P·3P 혼합 입점형 구조로 전환하며 주문·결제·배송·클레임·정산 전 과정의 운영 기준과 예외 처리 구조를 설계했습니다.",
+        "요구사항을 그대로 기능화하기보다 사용자·운영 문제, 거래 흐름, 책임 주체, 리스크를 먼저 구조화하고, 여러 이해관계자가 같은 기준으로 의사결정할 수 있도록 정리하는 데 강점이 있습니다.",
+      ],
+    },
+    projects: {
+      b2b: {
+        desc: "탐색·등록·거래·정산이 어긋나지 않는 거래 구조를 0→1 설계",
+      },
+      sub: {
+        desc: "제약은 채널·구조 설계로 우회하고, 반복 문제는 재정의해 해소한 3건",
       },
     },
   },

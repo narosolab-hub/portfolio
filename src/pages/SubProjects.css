@@ -49,10 +49,10 @@
 
 .phase-lead__text {
   font-family: var(--font-text);
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 600;
-  line-height: 1.45;
-  letter-spacing: -0.3px;
+  line-height: 1.5;
+  letter-spacing: -0.24px;
   color: var(--color-ink);
 }
 .phase-lead--dark .phase-lead__text {

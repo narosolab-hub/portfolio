@@ -26,7 +26,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 36px;
 }
 
 .tile__eyebrow {
@@ -35,6 +35,9 @@
   font-weight: 600;
   letter-spacing: -0.224px;
   color: var(--color-primary);
+  /* eyebrow는 바로 아래 제목의 라벨이므로 한 덩어리로 붙여 위계를 준다
+     (inner gap 36px를 상쇄해 실질 간격을 좁힘) */
+  margin-bottom: -22px;
 }
 .tile--dark .tile__eyebrow {
   color: var(--color-primary-on-dark);
@@ -47,9 +50,10 @@
 .tile__content {
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  gap: 32px;
+  /* 다이어그램·이미지 등 에셋은 텍스트보다 위아래 숨 쉴 공간을 더 준다 */
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .tile--dark .tile__subcopy {
   color: var(--color-body-muted);

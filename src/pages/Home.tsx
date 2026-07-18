@@ -11,15 +11,15 @@ import { DEFAULT_ORDER, type SectionId, type Variant } from "../variants";
 import "./Home.css";
 
 // Hero / Projects 섹션의 기본 문구. variant가 있으면 해당 항목만 덮어씁니다.
+// 기본 Hero는 헤드라인만 노출하는 슬림 구조입니다. 소개 문단(prose)은 바로
+// 아래 About 섹션이 전담합니다. variant가 hero.body를 넣으면 그때만 문단이
+// 나타납니다(예: focus-media).
 const HERO_DEFAULT = {
   eyebrow: "프로덕트 기획자 PORTFOLIO",
   lead: "복잡한 운영 구조를 기획으로 풀어내는",
   accent: "PM 박건주",
   tail: "입니다.",
-  body:
-    "단순 기능을 기획하는 것을 넘어 비즈니스 모델에 따른 회원·상품·주문·결제·정산 등 커머스 전 영역의 " +
-    "운영 기준을 설계했습니다. 문제의 본질과 그 안에 숨은 리스크를 먼저 보고 " +
-    "실제 사용자의 편의성까지 고려하여 기획합니다.",
+  body: undefined as string | undefined,
 };
 
 const PROJECTS_DEFAULT = {
@@ -32,6 +32,13 @@ const PROJECTS_DEFAULT = {
     desc: "바코드 매칭 자동화 · 라이브커머스 기획 · 마이페이지 개편",
   },
 };
+
+// About 섹션 기본 문단. variant.about.paragraphs가 있으면 통째로 대체됩니다.
+const ABOUT_DEFAULT: string[] = [
+  "B2B 커머스 플랫폼에서 PM으로 일하며 회원·상품·주문·결제·정산까지 운영 기준을 0 to 1로 설계했습니다. 거래처·공급사·운영자가 실제 업무를 끝까지 처리할 수 있는 수준까지 만드는 것을 목표로 합니다.",
+  "특히, 결제·정산처럼 어긋나면 회계·법무 문제로 번지는 영역에서 사용자 화면과 관리자(백오피스)를 함께 설계하고 정책·데이터·정산 흐름이 서로 어긋나지 않도록 기준을 잡았습니다. 문제를 정의할 때는 거래처 설문조사 등을 통한 정성적 VOC와 실제 주문·물량 데이터를 함께 근거로 활용합니다.",
+  "필요할 때는 있는 자원으로 빠르게 실행하기도 합니다. 개발 리소스를 최소화하여 라이브커머스를 시범 운영해보고, 반복 업무는 AI로 자동화 툴을 직접 만들어 해결합니다.",
+];
 
 const EXPERIENCES = [
   {
@@ -106,6 +113,7 @@ export default function Home({ variant }: { variant?: Variant }) {
     b2b: { ...PROJECTS_DEFAULT.b2b, ...variant?.projects?.b2b },
     sub: { ...PROJECTS_DEFAULT.sub, ...variant?.projects?.sub },
   };
+  const aboutParas = variant?.about?.paragraphs ?? ABOUT_DEFAULT;
 
   // 각 섹션을 id로 조회할 수 있게 렌더 함수로 분리
   const sections: Record<SectionId, () => ReactNode> = {
@@ -119,9 +127,11 @@ export default function Home({ variant }: { variant?: Variant }) {
           <span className="hero-accent">{hero.accent}</span>
           {hero.tail}
         </h1>
-        <p className="text-body" style={{ color: "var(--color-ink-muted-80)", maxWidth: 640, marginTop: 24 }}>
-          {hero.body}
-        </p>
+        {hero.body && (
+          <p className="text-body" style={{ color: "var(--color-ink-muted-80)", maxWidth: 640, marginTop: 24 }}>
+            {hero.body}
+          </p>
+        )}
       </Tile>
     ),
 
@@ -156,22 +166,15 @@ export default function Home({ variant }: { variant?: Variant }) {
       <Tile variant="dark" eyebrow="ABOUT">
         <div className="about-grid">
           <div className="about-grid__desc">
-            <p className="text-body" style={{ color: "var(--color-body-muted)" }}>
-              B2B 커머스 플랫폼에서 PM으로 일하며 회원·상품·주문·결제·정산까지 운영 기준을
-              0 to 1로 설계했습니다. 거래처·공급사·운영자가 실제 업무를 끝까지 처리할 수
-              있는 수준까지 만드는 것을 목표로 합니다.
-            </p>
-            <p className="text-body" style={{ color: "var(--color-body-muted)", marginTop: 14 }}>
-              특히, 결제·정산처럼 어긋나면 회계·법무 문제로 번지는 영역에서 사용자 화면과
-              관리자(백오피스)를 함께 설계하고 정책·데이터·정산 흐름이 서로 어긋나지 않도록
-              기준을 잡았습니다. 문제를 정의할 때는 거래처 설문조사 등을 통한 정성적 VOC와
-              실제 주문·물량 데이터를 함께 근거로 활용합니다.
-            </p>
-            <p className="text-body" style={{ color: "var(--color-body-muted)", marginTop: 14 }}>
-              필요할 때는 있는 자원으로 빠르게 실행하기도 합니다. 개발 리소스를 최소화하여
-              라이브커머스를 시범 운영해보고, 반복 업무는 AI로 자동화 툴을 직접 만들어
-              해결합니다.
-            </p>
+            {aboutParas.map((para, i) => (
+              <p
+                key={i}
+                className="text-body"
+                style={{ color: "var(--color-body-muted)", marginTop: i === 0 ? 0 : 14 }}
+              >
+                {para}
+              </p>
+            ))}
           </div>
         </div>
       </Tile>
