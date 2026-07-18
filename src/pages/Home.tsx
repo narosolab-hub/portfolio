@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import GlobalNav from "../components/GlobalNav";
 import Tile from "../components/Tile";
 import { ToolIcon } from "../components/ToolIcon";
-import redefineEmoji from "../assets/competency-emoji/redefine.png";
 import structureEmoji from "../assets/competency-emoji/structure.png";
 import alignEmoji from "../assets/competency-emoji/align.png";
 import aiEmoji from "../assets/competency-emoji/ai.png";
@@ -44,52 +43,55 @@ const EXPERIENCES = [
   {
     company: "주식회사 다운포스",
     period: "2024.08 — 현재",
-    duration: "약 2년",
-    role: "기획 팀원",
-    note: "B2B 입점형 도매 플랫폼 기획 전담 · 기여도 90%",
+    duration: "1년 11개월",
+    role: "플랫폼기획팀 · 대리(팀장대행) · Product Manager",
+    bullets: [
+      "연 24억·거래처 340개 규모 B2B몰을 1P·3P 혼합 입점형 플랫폼으로 전환하는 프로젝트를 1인 PM으로 리드",
+    ],
   },
   {
     company: "주식회사 앵커스",
     period: "2023.07 — 2024.08",
     duration: "1년 2개월",
-    role: "기획 팀원",
-    note: "글로벌 대기업 CRM 시스템 QA — 11개 고객 터치포인트 데이터 연동 검증",
+    role: "기획팀 · 사원 · QA 담당",
+    bullets: [
+      "글로벌 럭셔리 브랜드 CRM 통합 프로젝트 QA — 5개 리전·3개 사업부·3개 채널 데이터 통합 검증",
+    ],
   },
   {
     company: "주식회사 인디앤드코리아",
     period: "2021.04 — 2022.11",
     duration: "1년 8개월",
-    role: "전략기획 팀원",
-    note: "인천e몰 라이브커머스 시범 운영 · 복지플랫폼 마이페이지 개편",
+    role: "전략기획팀 · 주임",
+    bullets: [
+      "라이브커머스 4회로 약 3,900만 원 매출, 마이페이지 IA·UX 개편으로 관련 문의 0건 달성",
+    ],
   },
   {
-    company: "(주)공팔리터",
+    company: "주식회사 공팔리터",
     period: "2020.05 — 2020.11",
     duration: "7개월",
-    role: "마케팅·영업 팀원",
-    note: "",
+    role: "마케팅·영업팀 · 사원(계약직)",
+    bullets: [
+      "리뷰 마케팅 플랫폼 신규 광고주 발굴·캠페인 운영으로 개인 매출 3,000만 원 달성",
+    ],
   },
 ];
 
 const COMPETENCIES = [
   {
-    title: "1. 문제를 재정의합니다",
-    body: "요구사항을 곧바로 기획서나 할 일 목록으로 옮기지 않습니다. 먼저 '왜 이 문제가 생겼는지' 그 뒤에 어떤 구조와 운영 리스크가 숨어 있는지 봅니다. 단순한 개선 요청도 거래 구조·책임 주체·운영 기준이 바뀐다면 문제 자체를 다시 정의합니다.",
-    emoji: redefineEmoji,
-  },
-  {
-    title: "2. 생각을 구조화합니다",
-    body: "복잡한 문제를 잘게 쪼개서 생각합니다. 누가 무엇을 처리하는지, 어떤 흐름에서 예외가 생기는지, 무엇을 기준으로 판단해야 하는지 구조화합니다. 이를 기반으로 팀이 같은 그림을 보고 논의할 수 있는 구조로 명확히 정리합니다.",
+    title: "1. 문제를 구조로 다시 정의합니다",
+    body: "요구사항을 그대로 옮기지 않습니다. 왜 이 문제가 생겼는지와 그 뒤에 숨은 구조·리스크를 먼저 보고, 흐름·예외·판단 기준으로 쪼개 팀이 같은 그림으로 논의할 수 있게 정리합니다.",
     emoji: structureEmoji,
   },
   {
-    title: "3. 이해관계자와 조율합니다",
-    body: "요구가 서로 달라도 풀어갈 수 있는 방법을 찾습니다. 경영진·거래처·운영팀·재무팀의 엇갈리는 요구와 제약을 '어떤 기준으로 나누고 결정할지'를 고민합니다. 의사결정 근거와 우려되는 리스크까지 문서로 남겨 나중에 다시 흔들리지 않도록 기준을 세웁니다.",
+    title: "2. 이해관계자와 조율합니다",
+    body: "경영진·거래처·운영·재무의 엇갈리는 요구를 어떤 기준으로 나누고 결정할지 고민합니다. 의사결정 근거와 리스크를 문서로 남겨 기준이 나중에 흔들리지 않게 합니다.",
     emoji: alignEmoji,
   },
   {
-    title: "4. AI를 적극 활용합니다",
-    body: "필요한 도구가 없다고 기다리지 않습니다. 반복 업무나 데이터 정합성 등 풀 수 있는 문제를 발견하면 AI와 노코드 툴을 활용해 실무에 바로 적용할 수 있는 자동화 흐름을 직접 만듭니다.",
+    title: "3. AI를 적극 활용합니다",
+    body: "도구가 없다고 기다리지 않습니다. 반복 업무나 데이터 정합성 문제를 발견하면 AI·노코드 툴로 실무에 바로 쓰는 자동화를 직접 만듭니다.",
     emoji: aiEmoji,
   },
 ];
@@ -192,7 +194,7 @@ export default function Home({ variant }: { variant?: Variant }) {
               </p>
               <p
                 className="text-caption"
-                style={{ color: "var(--color-ink-muted-80)", marginTop: 10, textAlign: "justify" }}
+                style={{ color: "var(--color-ink-muted-80)", marginTop: 12, lineHeight: 1.65 }}
               >
                 {c.body}
               </p>
@@ -224,14 +226,11 @@ export default function Home({ variant }: { variant?: Variant }) {
                 <p className="text-caption" style={{ color: "var(--color-ink-muted-80)" }}>
                   {e.role}
                 </p>
-                {e.note && (
-                  <p
-                    className="text-caption"
-                    style={{ color: "var(--color-ink-muted-48)", marginTop: 4 }}
-                  >
-                    {e.note}
-                  </p>
-                )}
+                <ul className="exp-bullets text-caption">
+                  {e.bullets.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
               </div>
             </div>
           ))}

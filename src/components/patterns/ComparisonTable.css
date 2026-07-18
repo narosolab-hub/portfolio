@@ -1,3 +1,15 @@
+/* 다른 표/블록(StatusTable·AsIsList 등)과 동일한 카드 컨테이너로 통일 */
+.ctable-wrap {
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-lg);
+  background: var(--color-canvas);
+  padding: 6px 24px;
+}
+.ctable-wrap--dark {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+}
+
 .ctable {
   width: 100%;
   table-layout: fixed;
@@ -10,18 +22,23 @@
   font-size: 12px;
   font-weight: 600;
   color: var(--color-ink-muted-48);
-  padding: 0 16px 12px;
+  padding: 12px 16px 12px 0;
   border-bottom: 1px solid var(--color-hairline);
 }
 
 .ctable td {
   font-size: 14px;
   line-height: 1.5;
-  padding: 16px;
+  padding: 16px 16px 16px 0;
   border-bottom: 1px solid var(--color-hairline);
   vertical-align: top;
   word-break: keep-all;
   overflow-wrap: break-word;
+}
+
+.ctable th:last-child,
+.ctable td:last-child {
+  padding-right: 0;
 }
 
 .ctable tr:last-child td {

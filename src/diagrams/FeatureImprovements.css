@@ -145,7 +145,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14px;
+  padding: 16px;
   overflow: hidden;
   font: inherit;
   cursor: zoom-in;
@@ -153,7 +153,7 @@
 
 .feature-improve__gallery--cols-1 .feature-improve__gallery-frame {
   aspect-ratio: 16 / 9;
-  padding: 24px;
+  padding: 20px;
 }
 
 .feature-improve__gallery-image {

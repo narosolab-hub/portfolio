@@ -16,8 +16,9 @@ export default function ComparisonTable({
 }) {
   const hasReason = rows.some((r) => r.reason);
   return (
-    <table className={`ctable${dark ? " ctable--dark" : ""}`}>
-      <colgroup>
+    <div className={`ctable-wrap${dark ? " ctable-wrap--dark" : ""}`}>
+      <table className={`ctable${dark ? " ctable--dark" : ""}`}>
+        <colgroup>
         {hasReason ? (
           <>
             <col style={{ width: "16%" }} />
@@ -51,6 +52,7 @@ export default function ComparisonTable({
           </tr>
         ))}
       </tbody>
-    </table>
+      </table>
+    </div>
   );
 }
