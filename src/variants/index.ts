@@ -136,4 +136,5 @@ export function isVariantSlug(slug: string): boolean {
  */
 export const VARIANT_FAVICONS: Record<string, string> = {
   "bgzt": "/favicon-bgzt.png",
+  "toss-place": "/favicon-toss-place.png",
 };
