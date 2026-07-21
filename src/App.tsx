@@ -12,7 +12,6 @@ import SubProjects from "./pages/SubProjects";
 import {
   VARIANT_LOADERS,
   VARIANT_FAVICONS,
-  isVariantSlug,
   type Variant,
 } from "./variants";
 
@@ -43,12 +42,17 @@ function useRouteFavicon() {
   }, [href]);
 }
 
-// 공고별 버전: /<slug> — VARIANT_LOADERS에 등록된 slug만 열립니다.
-// 등록된 slug면 해당 공고 데이터 청크를 동적 import로 불러와 Home에 넘기고,
-// 없는 slug는 기본 페이지로 돌려보냅니다. (다른 공고 데이터는 이 시점에
-// 로드되지 않으므로 같은 번들에 노출되지 않습니다.)
-function VariantHome() {
-  const { slug = "" } = useParams();
+// slug으로 공고 데이터 청크를 동적 import 해서 반환합니다.
+//  - "invalid": 등록되지 않은 slug (호출부에서 기본 경로로 리다이렉트)
+//  - "loading": 유효한 slug이고 청크 도착 대기 중(아주 짧은 순간)
+//  - "ready":   variant 준비 완료
+// 방문한 공고의 청크만 내려받으므로 다른 공고 데이터는 노출되지 않습니다.
+type VariantState =
+  | { status: "invalid" }
+  | { status: "loading" }
+  | { status: "ready"; variant: Variant };
+
+function useVariantState(slug: string): VariantState {
   const loader = VARIANT_LOADERS[slug];
   const [variant, setVariant] = useState<Variant | null>(null);
 
@@ -64,27 +68,39 @@ function VariantHome() {
     };
   }, [loader]);
 
-  if (!loader) return <Navigate to="/" replace />;
-  // 청크 도착 전(아주 짧은 순간)에는 아무것도 그리지 않습니다.
-  if (!variant) return null;
-  return <Home variant={variant} />;
+  if (!loader) return { status: "invalid" };
+  if (!variant) return { status: "loading" };
+  return { status: "ready", variant };
+}
+
+// 공고별 버전: /<slug> — VARIANT_LOADERS에 등록된 slug만 열리고,
+// 없는 slug는 기본 페이지로 돌려보냅니다.
+function VariantHome() {
+  const { slug = "" } = useParams();
+  const s = useVariantState(slug);
+  if (s.status === "invalid") return <Navigate to="/" replace />;
+  if (s.status === "loading") return null;
+  return <Home variant={s.variant} />;
 }
 
 // 공고 컨텍스트를 유지한 채 여는 하위 페이지(B2B·Sub).
-// 페이지 내용 자체는 기본과 동일하므로 공고 데이터를 로드할 필요 없이,
-// slug가 유효한지만 즉시 확인합니다. URL에 slug가 남아 있어야 GlobalNav가
-// "Overview"를 다시 그 공고(/<slug>)로 돌려보낼 수 있습니다.
-// 등록되지 않은 slug면 공고 컨텍스트 없는 기본 경로로 돌려보냅니다.
+// 공고 청크를 불러와 페이지에 넘겨, 케이스 문구를 공고 톤으로 덮어쓸 수 있게
+// 합니다(override가 없으면 기본 문구 그대로). URL에 slug가 남아 있어야
+// GlobalNav가 "Overview"를 다시 그 공고(/<slug>)로 돌려보낼 수 있습니다.
 function VariantB2B() {
   const { slug = "" } = useParams();
-  if (!isVariantSlug(slug)) return <Navigate to="/b2b-platform" replace />;
-  return <B2BProject />;
+  const s = useVariantState(slug);
+  if (s.status === "invalid") return <Navigate to="/b2b-platform" replace />;
+  if (s.status === "loading") return null;
+  return <B2BProject variant={s.variant} />;
 }
 
 function VariantSub() {
   const { slug = "" } = useParams();
-  if (!isVariantSlug(slug)) return <Navigate to="/sub-projects" replace />;
-  return <SubProjects />;
+  const s = useVariantState(slug);
+  if (s.status === "invalid") return <Navigate to="/sub-projects" replace />;
+  if (s.status === "loading") return null;
+  return <SubProjects variant={s.variant} />;
 }
 
 function App() {

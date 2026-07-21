@@ -12,8 +12,13 @@ import PolicySplitCompare from "../diagrams/PolicySplitCompare";
 import QAPriorityBreakdown from "../diagrams/QAPriorityBreakdown";
 import SellerModelComparison from "../diagrams/SellerModelComparison";
 import SettlementDiscrepancy from "../diagrams/SettlementDiscrepancy";
+import type { Variant } from "../variants";
 
-export default function B2BProject() {
+export default function B2BProject({ variant }: { variant?: Variant }) {
+  // 공고별 문구 override. 없으면 아래 기본 문구가 그대로 쓰입니다(순수 fallback).
+  const ov = variant?.b2bPage;
+  const sec = (id: string) => ov?.sections?.[id] ?? {};
+
   return (
     <div>
       <GlobalNav />
@@ -21,11 +26,12 @@ export default function B2BProject() {
       <Tile variant="light">
         <p className="tile__eyebrow text-caption-strong">MAIN PROJECT 01 — B2B 플랫폼 전환</p>
         <h1 className="text-section-heading" style={{ maxWidth: 640 }}>
-          B2B 플랫폼으로 전환하며 중개 판매 구조에 맞춰 전 사이클의 운영 기준을 다시 세웠습니다.
+          {ov?.intro?.title ??
+            "B2B 플랫폼으로 전환하며 중개 판매 구조에 맞춰 전 사이클의 운영 기준을 다시 세웠습니다."}
         </h1>
         <p className="text-body" style={{ color: "var(--color-ink-muted-80)", maxWidth: 640 }}>
-          자사몰(1P)에서 플랫폼(3P)으로 넘어오는 과정에서 요구사항과 비즈니스 맥락을 바탕으로 문제를
-          정의하고 풀어간 세부 케이스들을 담았습니다.
+          {ov?.intro?.body ??
+            "자사몰(1P)에서 플랫폼(3P)으로 넘어오는 과정에서 요구사항과 비즈니스 맥락을 바탕으로 문제를 정의하고 풀어간 세부 케이스들을 담았습니다."}
         </p>
         <ProjectMeta
           items={[
@@ -39,25 +45,27 @@ export default function B2BProject() {
 
       <Tile
         variant="dark"
-        eyebrow="전환 범위"
-        title="커머스 전 영역 0 to 1 설계"
+        eyebrow={sec("expansion").eyebrow ?? "전환 범위"}
+        title={sec("expansion").title ?? "커머스 전 영역 0 to 1 설계"}
       >
         <ExpansionTimeline />
       </Tile>
 
       <Tile
         variant="parchment"
-        eyebrow="프로젝트 배경"
-        title="리뉴얼이 아닌 플랫폼 전환 프로젝트"
+        eyebrow={sec("background").eyebrow ?? "프로젝트 배경"}
+        title={sec("background").title ?? "리뉴얼이 아닌 플랫폼 전환 프로젝트"}
         subcopy={
-          <>
-            <strong>연 24억·거래처 약 340개</strong> 규모의 B2B 폐쇄몰 리뉴얼로 시작했지만
-            요구사항을 정리해보니 단순 리뉴얼이 아니었습니다. 자사 제조·사입 상품만으로는 재고
-            부담 탓에 카테고리 확장에 한계가 있어 <strong>외부 공급사 입점</strong>이 전사 방향으로
-            정해졌고 기존 직판 모델과 카페24로는 한 주문에 여러 공급사·배송지·상품이 섞이는 거래를
-            감당할 수 없었기 때문입니다. 그래서 <strong>1P·3P 혼합 입점형 플랫폼으로 전환</strong>하는
-            프로젝트로 재정의하고 회원·상품·주문·결제·정산 기준부터 새로 잡았습니다.
-          </>
+          sec("background").subcopy ?? (
+            <>
+              <strong>연 24억·거래처 약 340개</strong> 규모의 B2B 폐쇄몰 리뉴얼로 시작했지만
+              요구사항을 정리해보니 단순 리뉴얼이 아니었습니다. 자사 제조·사입 상품만으로는 재고
+              부담 탓에 카테고리 확장에 한계가 있어 <strong>외부 공급사 입점</strong>이 전사 방향으로
+              정해졌고 기존 직판 모델과 카페24로는 한 주문에 여러 공급사·배송지·상품이 섞이는 거래를
+              감당할 수 없었기 때문입니다. 그래서 <strong>1P·3P 혼합 입점형 플랫폼으로 전환</strong>하는
+              프로젝트로 재정의하고 회원·상품·주문·결제·정산 기준부터 새로 잡았습니다.
+            </>
+          )
         }
         footer="자사 직접 판매(1P)와 공급사 입점 판매(3P)가 한 플랫폼에서 함께 운영되며 판매 주체가 달라지는 문제를 해결해야 했습니다."
 
@@ -94,16 +102,18 @@ export default function B2BProject() {
 
       <Tile
         variant="dark"
-        eyebrow="운영 모델 대전제"
-        title="자사와 입점사 운영 모델을 통일한 구조"
+        eyebrow={sec("seller-model").eyebrow ?? "운영 모델 대전제"}
+        title={sec("seller-model").title ?? "자사와 입점사 운영 모델을 통일한 구조"}
         subcopy={
-          <>
-            자사는 플랫폼 <strong>운영 주체이자 판매자</strong>인 이중 구조였습니다. 자사 상품을
-            관리자 예외 기능으로 두면 신규 브랜드를 런칭할 때마다 운영·정산 예외 처리가 반복돼 개발
-            공수가 계속 늘어나는 구조였습니다. 그래서 <strong>자사도 외부 공급사와 같은 Seller
-            모델에 편입</strong>하고 수수료 0%·B2B 등급 할인처럼 자사에만 필요한 부분만 정책
-            예외로 분리해 <strong>예외 없는 단일 운영 구조</strong>를 만들었습니다.
-          </>
+          sec("seller-model").subcopy ?? (
+            <>
+              자사는 플랫폼 <strong>운영 주체이자 판매자</strong>인 이중 구조였습니다. 자사 상품을
+              관리자 예외 기능으로 두면 신규 브랜드를 런칭할 때마다 운영·정산 예외 처리가 반복돼 개발
+              공수가 계속 늘어나는 구조였습니다. 그래서 <strong>자사도 외부 공급사와 같은 Seller
+              모델에 편입</strong>하고 수수료 0%·B2B 등급 할인처럼 자사에만 필요한 부분만 정책
+              예외로 분리해 <strong>예외 없는 단일 운영 구조</strong>를 만들었습니다.
+            </>
+          )
         }
 
       >
@@ -112,16 +122,18 @@ export default function B2BProject() {
 
       <Tile
         variant="light"
-        eyebrow="다중 배송지 장바구니 일괄 결제"
-        title="담는 순간부터 배송지 기반 자동 분리"
+        eyebrow={sec("cart").eyebrow ?? "다중 배송지 장바구니 일괄 결제"}
+        title={sec("cart").title ?? "담는 순간부터 배송지 기반 자동 분리"}
         subcopy={
-          <>
-            거래처가 자기 고객 주소로 바로 보내는 <strong>위탁배송</strong> 구조라 주문마다 배송지가
-            달랐습니다. 상위 거래처는 배송지가 다른 주문을 <strong>하루 20~30건씩 개별 입력</strong>했고
-            기존 거래처 기준 월평균 약 4,500건에 달했습니다. 장바구니에 담는 시점부터 배송지를 지정해
-            여러 배송지를 한 번에 결제하되 시스템 내부에서는 공급사·배송지 기준으로 주문을 나눠야
-            했습니다.
-          </>
+          sec("cart").subcopy ?? (
+            <>
+              거래처가 자기 고객 주소로 바로 보내는 <strong>위탁배송</strong> 구조라 주문마다 배송지가
+              달랐습니다. 상위 거래처는 배송지가 다른 주문을 <strong>하루 20~30건씩 개별 입력</strong>했고
+              기존 거래처 기준 월평균 약 4,500건에 달했습니다. 장바구니에 담는 시점부터 배송지를 지정해
+              여러 배송지를 한 번에 결제하되 시스템 내부에서는 공급사·배송지 기준으로 주문을 나눠야
+              했습니다.
+            </>
+          )
         }
         footer="거래처에게는 여러 배송지를 한 번에 결제하는 경험을 주되 내부에서는 공급사·배송지 기준으로 주문을 나누었습니다."
         role={[
@@ -134,9 +146,12 @@ export default function B2BProject() {
 
       <Tile
         variant="parchment"
-        eyebrow="3단계 주문 구조"
-        title="결제·배송비·정산 기준을 분리한 3단계 주문 구조"
-        subcopy="장바구니 일괄 결제 이후 주문을 하나의 단위로 묶어두면 운영이 막혔습니다. 같은 결제 안에서도 공급사·배송지·출고지가 다르고 상품별로 부분 출고·취소·클레임이 따로 발생하기 때문입니다."
+        eyebrow={sec("order-tier").eyebrow ?? "3단계 주문 구조"}
+        title={sec("order-tier").title ?? "결제·배송비·정산 기준을 분리한 3단계 주문 구조"}
+        subcopy={
+          sec("order-tier").subcopy ??
+          "장바구니 일괄 결제 이후 주문을 하나의 단위로 묶어두면 운영이 막혔습니다. 같은 결제 안에서도 공급사·배송지·출고지가 다르고 상품별로 부분 출고·취소·클레임이 따로 발생하기 때문입니다."
+        }
         footer="주문번호 생성 기준을 3단계로 나눠, 1P·3P가 섞인 주문의 출고·배송비·정산이 엉키지 않게 맞물렸습니다."
         role={[
           "결제·배송지 묶음과 결제·개별 상품 두 가지 2단계 구조를 먼저 검토해 배송비·정산·부분 처리에서 각각의 한계를 확인했습니다.",
@@ -148,16 +163,18 @@ export default function B2BProject() {
 
       <Tile
         variant="light"
-        eyebrow="결제·정산 구조"
-        title="판매 주체에 따른 결제·정산 분리"
+        eyebrow={sec("payment-policy").eyebrow ?? "결제·정산 구조"}
+        title={sec("payment-policy").title ?? "판매 주체에 따른 결제·정산 분리"}
         subcopy={
-          <>
-            자사 상품과 입점사 상품은 판매 주체가 달라 일괄 결제 이후 서로 다른 규칙이
-            필요했습니다. 통신판매중개업 구조상 입점 상품의 결제대금을 자사 계좌로 직접 수취하면{" "}
-            <strong>전자금융거래법 위반</strong>이었고 핵심 거래처를 유지하려면 외상거래는 포기할
-            수 없었습니다. 그래서 <strong>3P는 PG 결제대행·지급대행</strong>으로 자사가 판매대금을
-            직접 수취하지 않게 하고 <strong>1P는 후불결제를 제한적으로 유지</strong>했습니다.
-          </>
+          sec("payment-policy").subcopy ?? (
+            <>
+              자사 상품과 입점사 상품은 판매 주체가 달라 일괄 결제 이후 서로 다른 규칙이
+              필요했습니다. 통신판매중개업 구조상 입점 상품의 결제대금을 자사 계좌로 직접 수취하면{" "}
+              <strong>전자금융거래법 위반</strong>이었고 핵심 거래처를 유지하려면 외상거래는 포기할
+              수 없었습니다. 그래서 <strong>3P는 PG 결제대행·지급대행</strong>으로 자사가 판매대금을
+              직접 수취하지 않게 하고 <strong>1P는 후불결제를 제한적으로 유지</strong>했습니다.
+            </>
+          )
         }
       >
         <PolicySplitCompare />
@@ -165,16 +182,18 @@ export default function B2BProject() {
 
       <Tile
         variant="dark"
-        eyebrow="매출·정산 소명"
-        title="PG 계약 주체와 실제 매출 주체의 간극 해소"
+        eyebrow={sec("settlement-proof").eyebrow ?? "매출·정산 소명"}
+        title={sec("settlement-proof").title ?? "PG 계약 주체와 실제 매출 주체의 간극 해소"}
         subcopy={
-          <>
-            1P·3P로 결제 기준을 나누면서 매출 신고 방식도 달라졌습니다. 플랫폼 특성상 PG로 발생한
-            결제대금은 전체가 <strong>자사 명의로 국세청에 신고</strong>되지만 실제 자사 매출은
-            수수료뿐이고 나머지는 공급사에 줄 정산대금입니다. 같은 PG 결제라도{" "}
-            <strong>계약 주체와 매출 주체가 달라</strong> 실제 매출분을 구분해 소명해야 하는
-            구조였습니다.
-          </>
+          sec("settlement-proof").subcopy ?? (
+            <>
+              1P·3P로 결제 기준을 나누면서 매출 신고 방식도 달라졌습니다. 플랫폼 특성상 PG로 발생한
+              결제대금은 전체가 <strong>자사 명의로 국세청에 신고</strong>되지만 실제 자사 매출은
+              수수료뿐이고 나머지는 공급사에 줄 정산대금입니다. 같은 PG 결제라도{" "}
+              <strong>계약 주체와 매출 주체가 달라</strong> 실제 매출분을 구분해 소명해야 하는
+              구조였습니다.
+            </>
+          )
         }
         footer="‘기능을 붙이는’ 문제가 아니라 회사가 무엇을 매출로 신고하느냐를 먼저 맞춰야 하는 과제로 보고, 전문 회계 검토와 함께 진행하고 있습니다."
         role={[
@@ -194,17 +213,19 @@ export default function B2BProject() {
 
       <Tile
         variant="light"
-        eyebrow="운영 가능성 검증 · E2E QA 설계"
-        title="기능 단위가 아닌 거래 흐름 기준 QA"
+        eyebrow={sec("e2e-qa").eyebrow ?? "운영 가능성 검증 · E2E QA 설계"}
+        title={sec("e2e-qa").title ?? "기능 단위가 아닌 거래 흐름 기준 QA"}
         subcopy={
-          <>
-            회원·상품·주문·결제·정산이 모두 연결된 플랫폼이라 개별 기능이 정상 동작해도 실제 거래
-            흐름에서는 막히는 지점이 생겼습니다. 또한, 범위가 큰 만큼 개발이 다 끝난 뒤 한 번에
-            검수하면 리스크 발견이 늦어질 수 있었습니다. 때문에 개발 중 QA를 병행하는{" "}
-            <strong>거래 흐름 기준 E2E 테스트</strong>를 먼저 제안했고 기능 단위가 아니라{" "}
-            <strong>회원가입·입점 신청부터 정산까지</strong> 시나리오가 끝까지 이어지는지를 오픈
-            기준으로 삼았습니다.
-          </>
+          sec("e2e-qa").subcopy ?? (
+            <>
+              회원·상품·주문·결제·정산이 모두 연결된 플랫폼이라 개별 기능이 정상 동작해도 실제 거래
+              흐름에서는 막히는 지점이 생겼습니다. 또한, 범위가 큰 만큼 개발이 다 끝난 뒤 한 번에
+              검수하면 리스크 발견이 늦어질 수 있었습니다. 때문에 개발 중 QA를 병행하는{" "}
+              <strong>거래 흐름 기준 E2E 테스트</strong>를 먼저 제안했고 기능 단위가 아니라{" "}
+              <strong>회원가입·입점 신청부터 정산까지</strong> 시나리오가 끝까지 이어지는지를 오픈
+              기준으로 삼았습니다.
+            </>
+          )
         }
         footer="QA는 단순히 버그를 찾아내는 것이 아니라 Go-Live/No-Go 사인이었습니다."
         role={[
@@ -253,15 +274,17 @@ export default function B2BProject() {
 
       <Tile
         variant="parchment"
-        eyebrow="운영 가능성 검증 · P0 케이스 딥다이브"
-        title="기준이 없던 정산 로직 검증과 정산 3원칙"
+        eyebrow={sec("settlement-logic").eyebrow ?? "운영 가능성 검증 · P0 케이스 딥다이브"}
+        title={sec("settlement-logic").title ?? "기준이 없던 정산 로직 검증과 정산 3원칙"}
         subcopy={
-          <>
-            134건 가운데 가장 문제가 컸던 케이스입니다. 정산 QA를 진행하다 정산 산정 기준·상태값
-            분리·원 단위 절사 같은 지점이 화면마다 다르게 처리되는 걸 확인했습니다. 실거래가 쌓이면{" "}
-            <strong>회계 오차가 계속 누적될</strong> 수 있는 지점이라 오픈 전 개발사와 로직을 하나씩
-            맞추며 정산 기준부터 다시 정리했습니다.
-          </>
+          sec("settlement-logic").subcopy ?? (
+            <>
+              134건 가운데 가장 문제가 컸던 케이스입니다. 정산 QA를 진행하다 정산 산정 기준·상태값
+              분리·원 단위 절사 같은 지점이 화면마다 다르게 처리되는 걸 확인했습니다. 실거래가 쌓이면{" "}
+              <strong>회계 오차가 계속 누적될</strong> 수 있는 지점이라 오픈 전 개발사와 로직을 하나씩
+              맞추며 정산 기준부터 다시 정리했습니다.
+            </>
+          )
         }
         footer="오픈 후 실거래에서 바로 문제가 될 수 있는 정산 리스크인 만큼 화면보다 로직 기준을 특히 더 꼼꼼히 확인했습니다."
         role={[
@@ -274,15 +297,17 @@ export default function B2BProject() {
 
       <Tile
         variant="dark"
-        eyebrow="사용자 기능 개선"
-        title="거래처·공급사·운영팀의 반복 불편 해소"
+        eyebrow={sec("feature-improve").eyebrow ?? "사용자 기능 개선"}
+        title={sec("feature-improve").title ?? "거래처·공급사·운영팀의 반복 불편 해소"}
         subcopy={
-          <>
-            구조 설계만큼이나 플랫폼의 실사용자인 구매자(거래처)·판매자(공급사)·운영자(운영팀)가
-            반복해서 겪는 불편도 기능 요구사항으로 정리했습니다. 무엇을 먼저 만들지는{" "}
-            <strong>거래처 설문 최다 요구와 운영팀의 반복 업무</strong>를 기준으로 정해 개발 공수
-            대비 체감이 큰 기능부터 기획했습니다.
-          </>
+          sec("feature-improve").subcopy ?? (
+            <>
+              구조 설계만큼이나 플랫폼의 실사용자인 구매자(거래처)·판매자(공급사)·운영자(운영팀)가
+              반복해서 겪는 불편도 기능 요구사항으로 정리했습니다. 무엇을 먼저 만들지는{" "}
+              <strong>거래처 설문 최다 요구와 운영팀의 반복 업무</strong>를 기준으로 정해 개발 공수
+              대비 체감이 큰 기능부터 기획했습니다.
+            </>
+          )
         }
         role={[
           "구매자에게는 품절 상품 재입고 시 SMS 알림, 운영자에게는 매번 수기로 확인하던 KC 인증을 API 조회로 전환하는 기능을 기획했습니다.",

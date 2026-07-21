@@ -9,6 +9,7 @@ import resultScreen from "../assets/barcode-tool/result-screen.png";
 import flowLogicScreen from "../assets/live-commerce/flow-logic.png";
 import mypageFeatureImprovement from "../assets/welfare-mypage/feature-improvement.png";
 import wireframeSpec from "../assets/welfare-mypage/wireframe-spec.png";
+import type { Variant } from "../variants";
 import "./SubProjects.css";
 
 function AsIsList({
@@ -118,33 +119,38 @@ function ScreenshotGallery({
   );
 }
 
-export default function SubProjects() {
+export default function SubProjects({ variant }: { variant?: Variant }) {
+  // 공고별 문구 override. 없으면 아래 기본 문구가 그대로 쓰입니다(순수 fallback).
+  const ov = variant?.subPage;
+  const sec = (id: string) => ov?.sections?.[id] ?? {};
+
   return (
     <div>
       <GlobalNav />
 
       <Tile variant="light">
         <p className="tile__eyebrow text-caption-strong">SUB PROJECTS</p>
-        <h1 className="text-section-heading">서브 프로젝트 3건</h1>
+        <h1 className="text-section-heading">{ov?.intro?.title ?? "서브 프로젝트 3건"}</h1>
         <p className="text-body" style={{ color: "var(--color-ink-muted-80)", maxWidth: 640 }}>
-          각각 다른 제약 속에서 문제를 정의하고 풀어낸 세 프로젝트입니다. 영업팀의 반복 바코드 매칭은
-          자동화 웹앱으로, 앱인앱의 라이브 송출 제약은 유튜브·자사몰 채널 분리로, 반복되던 복지포인트
-          문의는 마이페이지 개편으로 해결했습니다.
+          {ov?.intro?.body ??
+            "각각 다른 제약 속에서 문제를 정의하고 풀어낸 세 프로젝트입니다. 영업팀의 반복 바코드 매칭은 자동화 웹앱으로, 앱인앱의 라이브 송출 제약은 유튜브·자사몰 채널 분리로, 반복되던 복지포인트 문의는 마이페이지 개편으로 해결했습니다."}
         </p>
       </Tile>
 
       {/* PROJECT 02 — 표준바코드 매칭 자동화 */}
       <Tile
         variant="parchment"
-        eyebrow="PROJECT 02"
-        title="AI로 표준바코드 매칭 업무 간소화 웹앱 개발"
+        eyebrow={sec("barcode").eyebrow ?? "PROJECT 02"}
+        title={sec("barcode").title ?? "AI로 표준바코드 매칭 업무 간소화 웹앱 개발"}
         subcopy={
-          <>
-            오프라인 영업 확대로 표준바코드(코리아넷) 관리가 필요해졌지만 온라인 중심 사업 구조상
-            사내 시스템에는 임시 바코드만 등록돼 있었습니다. 수기로 처리하기엔 번거로운 작업이 많아
-            간소화 툴을 직접 만들어 <strong>2시간 넘게 걸리던 대조 작업을 10분 내외</strong>로 줄이고
-            월 100여 건을 상시 처리하고 있습니다.
-          </>
+          sec("barcode").subcopy ?? (
+            <>
+              오프라인 영업 확대로 표준바코드(코리아넷) 관리가 필요해졌지만 온라인 중심 사업 구조상
+              사내 시스템에는 임시 바코드만 등록돼 있었습니다. 수기로 처리하기엔 번거로운 작업이 많아
+              간소화 툴을 직접 만들어 <strong>2시간 넘게 걸리던 대조 작업을 10분 내외</strong>로 줄이고
+              월 100여 건을 상시 처리하고 있습니다.
+            </>
+          )
         }
       >
         <ProjectMeta
@@ -238,16 +244,20 @@ export default function SubProjects() {
       {/* PROJECT 03 — 라이브커머스 */}
       <Tile
         variant="light"
-        eyebrow="PROJECT 03"
-        title="인천e몰 라이브커머스 시범 운영
-송출 불가 제약을 채널 분리로 우회한 신규 세일즈 채널 검증"
+        eyebrow={sec("live").eyebrow ?? "PROJECT 03"}
+        title={
+          sec("live").title ??
+          "인천e몰 라이브커머스 시범 운영\n송출 불가 제약을 채널 분리로 우회한 신규 세일즈 채널 검증"
+        }
         subcopy={
-          <>
-            <strong>226만</strong>이 이용하는 인천 시민 지역몰의 이커머스 활성화를 위해 라이브커머스
-            시범 운영이 필요했습니다. 목표는 <strong>큰 개발 없이</strong> 실제 구매까지 이어지는
-            라이브커머스가 가능한지 검증하는 것이었습니다. 앱인앱 송출 제약은 유튜브를 송출 채널로
-            삼아 우회했고 <strong>4회 방송으로 약 3,900만원 매출</strong>을 냈습니다.
-          </>
+          sec("live").subcopy ?? (
+            <>
+              <strong>226만</strong>이 이용하는 인천 시민 지역몰의 이커머스 활성화를 위해 라이브커머스
+              시범 운영이 필요했습니다. 목표는 <strong>큰 개발 없이</strong> 실제 구매까지 이어지는
+              라이브커머스가 가능한지 검증하는 것이었습니다. 앱인앱 송출 제약은 유튜브를 송출 채널로
+              삼아 우회했고 <strong>4회 방송으로 약 3,900만원 매출</strong>을 냈습니다.
+            </>
+          )
         }
       >
         <ProjectMeta
@@ -306,16 +316,20 @@ export default function SubProjects() {
       {/* PROJECT 04 — 복지플랫폼 마이페이지 */}
       <Tile
         variant="parchment"
-        eyebrow="PROJECT 04"
-        title="복지플랫폼 마이페이지 개편
-반복 VoC를 핵심 재화 접근성 문제로 재정의해 IA/UXUI 전면 개편"
+        eyebrow={sec("mypage").eyebrow ?? "PROJECT 04"}
+        title={
+          sec("mypage").title ??
+          "복지플랫폼 마이페이지 개편\n반복 VoC를 핵심 재화 접근성 문제로 재정의해 IA/UXUI 전면 개편"
+        }
         subcopy={
-          <>
-            임직원이 지급받은 복지포인트로 상품을 구매하는 B2B 복지몰입니다. 사용자 대다수가 모바일
-            앱을 썼지만 핵심 기능인 복지포인트 현황은 모바일 웹에서만 노출되는 구조였습니다.
-            마이페이지 개편으로 접근성 문제를 풀어 런칭 전 <strong>주 1~3회</strong> 꾸준히 인입되던
-            복지포인트 문의가 <strong>런칭 후 0건</strong>으로 줄었습니다.
-          </>
+          sec("mypage").subcopy ?? (
+            <>
+              임직원이 지급받은 복지포인트로 상품을 구매하는 B2B 복지몰입니다. 사용자 대다수가 모바일
+              앱을 썼지만 핵심 기능인 복지포인트 현황은 모바일 웹에서만 노출되는 구조였습니다.
+              마이페이지 개편으로 접근성 문제를 풀어 런칭 전 <strong>주 1~3회</strong> 꾸준히 인입되던
+              복지포인트 문의가 <strong>런칭 후 0건</strong>으로 줄었습니다.
+            </>
+          )
         }
       >
         <ProjectMeta

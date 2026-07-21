@@ -79,6 +79,34 @@ export interface Variant {
     b2b?: { title?: string; desc?: string };
     sub?: { title?: string; desc?: string };
   };
+
+  /** 케이스 스터디 페이지(B2B 상세) 문구 override — 공고별 톤 조정용 */
+  b2bPage?: CasePageOverride;
+
+  /** 케이스 스터디 페이지(서브 프로젝트) 문구 override — 공고별 톤 조정용 */
+  subPage?: CasePageOverride;
+}
+
+/**
+ * 케이스 스터디 한 페이지의 문구 override.
+ * 다이어그램·수치·표는 그대로 두고 "읽히는 문구"만 공고 톤에 맞게 바꾸는 용도.
+ * 아무 것도 주지 않으면 페이지는 기본 문구 그대로 렌더됩니다(순수 fallback).
+ */
+export interface CasePageOverride {
+  /** 최상단 인트로 타일(제목/설명)만 교체. eyebrow(MAIN PROJECT…)는 고정 */
+  intro?: { title?: string; body?: string };
+  /**
+   * 개별 섹션 문구 교체. 키는 각 페이지 파일에 박아둔 섹션 id.
+   * 지정한 항목만 덮어쓰고, subcopy는 문자열을 주면 기본 JSX 설명을 대체합니다.
+   */
+  sections?: Record<string, CaseSectionOverride>;
+}
+
+/** 케이스 스터디 섹션 하나의 문구 override (지정한 항목만 덮어씀) */
+export interface CaseSectionOverride {
+  eyebrow?: string;
+  title?: string;
+  subcopy?: string;
 }
 
 /**
@@ -93,6 +121,7 @@ export const VARIANT_LOADERS: Record<
 > = {
   "focus-media": () => import("./focus-media"),
   "bgzt": () => import("./bgzt"),
+  "toss-place": () => import("./toss-place"),
 };
 
 /** 해당 slug가 등록된 공고 버전인지 (데이터 청크 로드 없이 즉시 판별) */
