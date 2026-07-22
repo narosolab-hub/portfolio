@@ -3,6 +3,7 @@ import "./FeatureImprovements.css";
 import OrdinalBars from "../components/patterns/OrdinalBars";
 import ComparisonTable from "../components/patterns/ComparisonTable";
 import Lightbox from "../components/Lightbox";
+import { useIsExport } from "../export-mode";
 import restock1 from "../assets/feature-improvements/restock-1-badge.png";
 import restock2 from "../assets/feature-improvements/restock-2-request.png";
 import restock3 from "../assets/feature-improvements/restock-3-list.png";
@@ -68,6 +69,7 @@ export default function FeatureImprovements() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+  const isExport = useIsExport();
   const feature = FEATURES[active];
 
   useEffect(() => {
@@ -78,18 +80,71 @@ export default function FeatureImprovements() {
     return () => window.clearInterval(id);
   }, [paused, lightbox]);
 
+  // 상단 설문(차트+표)은 화면·인쇄 공통이라 한 번만 정의해 재사용한다.
+  const surveyBlock = (
+    <div className="feature-improve__survey">
+      <div className="feature-improve__chart">
+        <p className="feature-improve__tag text-tagline">거래처 설문 (37개사 대상 · 복수 응답)</p>
+        <OrdinalBars vertical items={SURVEY_ITEMS} />
+      </div>
+      <div className="feature-improve__needs">
+        <p className="feature-improve__tag text-tagline">필요했던 기능</p>
+        <ComparisonTable rows={NEEDS_ROWS} />
+      </div>
+    </div>
+  );
+
+  const renderGallery = (images: (typeof FEATURES)[number]["images"]) => (
+    <div className={`feature-improve__gallery feature-improve__gallery--cols-${images.length}`}>
+      {images.map((img, i) => (
+        <figure className="feature-improve__gallery-item" key={img.caption}>
+          <button
+            type="button"
+            className="feature-improve__gallery-frame"
+            onClick={() => setLightbox({ src: img.src, alt: img.caption })}
+            aria-label={`${img.caption} 크게 보기`}
+          >
+            <img src={img.src} alt={img.caption} className="feature-improve__gallery-image" />
+          </button>
+          <figcaption className="feature-improve__gallery-caption">
+            {images.length > 1 ? `${i + 1}. ${img.caption}` : img.caption}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+
+  // 제출용 PDF: 기능 상세 캐러셀도 3개 기능을 모두 펼쳐 각 설명+갤러리를
+  // 순서대로 나열한다(캡처가 전 상태를 담게).
+  if (isExport) {
+    return (
+      <div className="feature-improve feature-improve--export">
+        {surveyBlock}
+        <div className="feature-improve__showcase">
+          <p className="feature-improve__tag text-tagline">기능 상세</p>
+          {FEATURES.map((f, i) => (
+            <div className="feature-improve__export-feature" key={f.label}>
+              <p className="feature-improve__dot-label">
+                <span className="feature-improve__dot-index">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-caption-strong">{f.label}</span>
+              </p>
+              <p className="feature-improve__showcase-desc text-caption">{f.description}</p>
+              {renderGallery(f.images)}
+            </div>
+          ))}
+        </div>
+        {lightbox && (
+          <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={() => setLightbox(null)} />
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="feature-improve">
-      <div className="feature-improve__survey">
-        <div className="feature-improve__chart">
-          <p className="feature-improve__tag text-tagline">거래처 설문 (37개사 대상 · 복수 응답)</p>
-          <OrdinalBars dark vertical items={SURVEY_ITEMS} />
-        </div>
-        <div className="feature-improve__needs">
-          <p className="feature-improve__tag text-tagline">필요했던 기능</p>
-          <ComparisonTable dark rows={NEEDS_ROWS} />
-        </div>
-      </div>
+      {surveyBlock}
 
       <div
         className={`feature-improve__showcase${paused ? " feature-improve__showcase--paused" : ""}`}
@@ -121,29 +176,7 @@ export default function FeatureImprovements() {
 
         <p className="feature-improve__showcase-desc text-caption">{feature.description}</p>
 
-        <div
-          className={`feature-improve__gallery feature-improve__gallery--cols-${feature.images.length}`}
-        >
-          {feature.images.map((img, i) => (
-            <figure className="feature-improve__gallery-item" key={img.caption}>
-              <button
-                type="button"
-                className="feature-improve__gallery-frame"
-                onClick={() => setLightbox({ src: img.src, alt: img.caption })}
-                aria-label={`${img.caption} 크게 보기`}
-              >
-                <img
-                  src={img.src}
-                  alt={img.caption}
-                  className="feature-improve__gallery-image"
-                />
-              </button>
-              <figcaption className="feature-improve__gallery-caption">
-                {feature.images.length > 1 ? `${i + 1}. ${img.caption}` : img.caption}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+        {renderGallery(feature.images)}
       </div>
 
       {lightbox && (

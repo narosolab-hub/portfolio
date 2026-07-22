@@ -12,3 +12,18 @@ h3 {
 p {
   margin: 0;
 }
+
+/* ── 제출용 PDF 전용 모드 (?export=1) ──────────────────────────
+   화면 전용 UI를 숨기고 섹션 여백을 압축해 인쇄 페이지 수를 줄인다.
+   섹션을 페이지에 어떻게 배분·분할할지는 print-one-pdf.mjs가 지면
+   높이를 계산해 처리하므로, 여기서는 blanket break 규칙을 걸지 않는다. */
+.export-mode .global-nav {
+  display: none;
+}
+
+/* 섹션(.tile) 상하 여백을 80px→40px로 좁혀 지면 낭비를 줄인다.
+   --space-section은 Tile padding과 Home의 섹션 간격에 함께 쓰인다. */
+.export-mode {
+  --space-section: 40px;
+  --space-section-sm: 32px;
+}

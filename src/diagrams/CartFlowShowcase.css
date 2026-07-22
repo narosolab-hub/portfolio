@@ -1,12 +1,17 @@
 .cart-flow {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .cart-flow__tag {
   color: var(--color-primary);
   margin-bottom: 2px;
+}
+
+/* 스텝 설명과 실제 이미지 사이는 조금 더 벌려 빽빽하지 않게 */
+.cart-flow__caption {
+  margin-bottom: 6px;
 }
 
 .cart-flow__frame {
@@ -116,4 +121,25 @@
   .cart-flow__dot-label span:last-child {
     display: none;
   }
+}
+
+/* ── 제출용 PDF: 5개 스텝을 3열 그리드로(1·2·3 / 4·5 두 줄) ──── */
+.cart-flow--export {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px 20px;
+}
+.cart-flow--export .cart-flow__tag {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+.cart-flow__export-step {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  break-inside: avoid;
+}
+.cart-flow__frame--export {
+  height: 300px;
 }

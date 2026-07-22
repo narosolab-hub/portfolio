@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import "./CartFlowShowcase.css";
 import Lightbox from "../components/Lightbox";
+import { useIsExport } from "../export-mode";
 import step1 from "../assets/cart-flow/step1-add-to-cart.png";
 import step2 from "../assets/cart-flow/step2-select-address.png";
 import step3 from "../assets/cart-flow/step3-cart-list.png";
@@ -49,6 +50,7 @@ export default function CartFlowShowcase() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const isExport = useIsExport();
   const current = steps[active];
 
   useEffect(() => {
@@ -58,6 +60,30 @@ export default function CartFlowShowcase() {
     }, INTERVAL_MS);
     return () => window.clearInterval(id);
   }, [paused, lightboxOpen]);
+
+  // 제출용 PDF: 캐러셀은 한 스텝만 보이므로, 인쇄에서는 5개 스텝을 모두
+  // 펼쳐 각 캡션+화면을 순서대로 나열한다(캡처가 전 상태를 담게).
+  if (isExport) {
+    return (
+      <div className="cart-flow cart-flow--export">
+        <p className="cart-flow__tag text-tagline">장바구니 일괄 주문 flow</p>
+        {steps.map((step, i) => (
+          <figure className="cart-flow__export-step" key={step.label}>
+            <p className="cart-flow__dot-label">
+              <span className="cart-flow__dot-index">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="text-caption-strong">{step.label}</span>
+            </p>
+            <p className="cart-flow__caption text-body">{renderBold(step.caption)}</p>
+            <div className="cart-flow__frame cart-flow__frame--export">
+              <img src={step.image} alt={step.label} className="cart-flow__image" />
+            </div>
+          </figure>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div

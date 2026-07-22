@@ -24,7 +24,7 @@
   border-top: none;
 }
 .as-is-list__k {
-  color: var(--color-primary);
+  color: var(--color-ink);
 }
 .as-is-list--dark .as-is-list__k {
   color: var(--color-primary-on-dark);
@@ -49,10 +49,10 @@
 
 .phase-lead__text {
   font-family: var(--font-text);
-  font-size: 17px;
-  font-weight: 600;
-  line-height: 1.5;
-  letter-spacing: -0.24px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.2px;
   color: var(--color-ink);
 }
 .phase-lead--dark .phase-lead__text {
@@ -185,3 +185,9 @@
   color: #fff;
 }
 
+
+/* ── 제출용 PDF: 단일 와이드 스크린샷을 낮춰 섹션이 지면에 맞게 채워지도록 ── */
+.export-mode .screenshot-gallery__frame--wide {
+  aspect-ratio: auto;
+  height: 360px;
+}

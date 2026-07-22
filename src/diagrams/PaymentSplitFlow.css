@@ -7,13 +7,14 @@
 
 .pay-split__tag {
   align-self: flex-start;
-  color: var(--color-primary-on-dark);
+  color: var(--color-primary);
   margin-bottom: 16px;
 }
 
 .pay-split__root {
-  background: var(--color-surface-tile-2);
-  color: #fff;
+  background: var(--color-canvas-parchment);
+  border: 1px solid var(--color-hairline);
+  color: var(--color-ink);
   border-radius: var(--radius-md);
   padding: 12px 20px;
   text-align: center;
@@ -24,13 +25,13 @@
 }
 .pay-split__root span {
   font-size: 11px;
-  color: var(--color-body-muted);
+  color: var(--color-ink-muted-48);
 }
 
 .pay-split__branch-line {
   width: 1px;
   height: 20px;
-  background: rgba(255, 255, 255, 0.24);
+  background: var(--color-hairline);
 }
 
 .pay-split__cols {
@@ -62,14 +63,14 @@
 .pay-split__col-label {
   font-size: 12px;
   font-weight: 700;
-  color: var(--color-primary-on-dark);
+  color: var(--color-primary);
 }
 
 .pay-split__col-badge {
   font-size: 10px;
   font-weight: 700;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.16);
+  color: var(--color-ink-muted-80);
+  background: var(--color-divider-soft);
   border-radius: var(--radius-pill);
   padding: 2px 8px;
 }
@@ -77,15 +78,15 @@
 .pay-split__step {
   width: 100%;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid var(--color-hairline);
   border-radius: var(--radius-sm);
   padding: 10px 14px;
   font-size: 13px;
-  color: var(--color-body-muted);
+  color: var(--color-ink-muted-80);
 }
 
 .pay-split__connector {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--color-ink-muted-48);
   font-size: 14px;
   margin: 6px 0;
 }
@@ -120,7 +121,7 @@
 
 .pay-split__split-note {
   font-size: 10px;
-  color: var(--color-body-muted);
+  color: var(--color-ink-muted-48);
 }
 
 .pay-split__split-item--revenue {
@@ -134,14 +135,14 @@
 
 .pay-split__split-item--payout {
   background: transparent;
-  border: 1px dashed rgba(255, 255, 255, 0.32);
-  color: var(--color-body-muted);
+  border: 1px dashed var(--color-hairline);
+  color: var(--color-ink-muted-80);
 }
 .pay-split__split-item--payout .pay-split__split-label {
-  color: var(--color-body-muted);
+  color: var(--color-ink-muted-48);
 }
 .pay-split__split-item--payout .pay-split__split-value {
-  color: #fff;
+  color: var(--color-ink);
 }
 
 .pay-split__split-item--placeholder {
@@ -188,25 +189,25 @@
 }
 
 .pay-split__footer {
-  margin-top: 20px;
-  color: var(--color-body-muted);
+  margin-top: 28px;
+  color: var(--color-ink-muted-80);
   text-align: center;
   max-width: 560px;
 }
 .pay-split__footer strong {
-  color: #fff;
+  color: var(--color-ink);
 }
 
 .pay-split__review {
-  margin-top: 24px;
+  margin-top: 28px;
   width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-  padding-top: 16px;
+  border-top: 1px solid var(--color-hairline);
+  padding-top: 20px;
 }
 
 .pay-split__review-label {
   display: block;
-  color: var(--color-primary-on-dark);
+  color: var(--color-primary);
   margin-bottom: 10px;
 }
 
@@ -227,7 +228,7 @@
 .pay-split__review-item {
   position: relative;
   padding-left: 14px;
-  color: var(--color-body-muted);
+  color: var(--color-ink-muted-80);
   line-height: 1.5;
 }
 .pay-split__review-item::before {

@@ -176,19 +176,10 @@
 }
 
 /* ── Tools ── */
-.tools-section {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-.tools-group__label {
-  color: var(--color-body-muted);
-  margin-bottom: 14px;
-}
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 8px;
 }
 @media (max-width: 560px) {
   .tools-grid {
@@ -198,16 +189,38 @@
 .tool-chip {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.07);
+  gap: 10px;
+  padding: 9px 14px;
+  background: var(--color-canvas);
+  border: 1px solid var(--color-hairline);
   border-radius: var(--radius-md);
+  min-width: 0;
 }
 .tool-chip--secondary {
-  background: rgba(255, 255, 255, 0.03);
+  background: transparent;
 }
+/* 라벨·설명을 한 줄로 나란히 둬 칩 높이를 줄인다 */
 .tool-chip__text {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+.tool-chip__label {
+  color: var(--color-ink);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.tool-chip__desc {
+  color: var(--color-ink-muted-48);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tool-chip--secondary .tool-chip__label {
+  color: var(--color-ink-muted-80);
+}
+.tool-chip--secondary .tool-chip__desc {
+  color: var(--color-ink-muted-48);
 }

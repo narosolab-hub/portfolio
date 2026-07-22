@@ -1,7 +1,7 @@
 .e2e-flow {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .e2e-flow__tag {

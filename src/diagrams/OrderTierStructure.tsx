@@ -40,8 +40,6 @@ const groups = [
 export default function OrderTierStructure() {
   return (
     <div className="tier-viz">
-      <p className="tier-viz__tag text-tagline">결제·배송그룹·상품 단위로 3단계 주문 설계</p>
-
       <div className="tier-viz__rejected">
         {rejected.map((r) => (
           <div className="tier-viz__reject-card" key={r.title}>

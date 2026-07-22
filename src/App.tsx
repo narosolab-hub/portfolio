@@ -14,6 +14,7 @@ import {
   VARIANT_FAVICONS,
   type Variant,
 } from "./variants";
+import { useExportModeClass } from "./export-mode";
 
 const DEFAULT_FAVICON = "/favicon.svg";
 
@@ -105,6 +106,7 @@ function VariantSub() {
 
 function App() {
   useRouteFavicon();
+  useExportModeClass();
   return (
     <Routes>
       <Route path="/" element={<Home />} />

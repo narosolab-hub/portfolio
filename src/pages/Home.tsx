@@ -7,6 +7,7 @@ import structureEmoji from "../assets/competency-emoji/structure.png";
 import alignEmoji from "../assets/competency-emoji/align.png";
 import aiEmoji from "../assets/competency-emoji/ai.png";
 import { DEFAULT_ORDER, type SectionId, type Variant } from "../variants";
+import { useIsExport } from "../export-mode";
 import "./Home.css";
 
 // Hero / Projects 섹션의 기본 문구. variant가 있으면 해당 항목만 덮어씁니다.
@@ -124,8 +125,12 @@ export default function Home({ variant }: { variant?: Variant }) {
 
   // 섹션 순서/숨김을 먼저 계산. Hero와 Projects가 실제로 맞붙어 있을 때만
   // 둘 사이 여백을 좁히고(compact), About 등이 끼면 기본 여백을 그대로 둡니다.
+  // 제출용 PDF(export=1)에서는 다른 페이지로 넘어가는 프로젝트 이동 버튼이
+  // 의미가 없으므로 projects 섹션을 통째로 뺀다(빈 여백·페이지 낭비 방지).
+  const exportMode = useIsExport();
   const order = variant?.order ?? DEFAULT_ORDER;
   const hidden = new Set(variant?.hidden ?? []);
+  if (exportMode) hidden.add("projects");
   const visible = order.filter((id) => !hidden.has(id));
   const heroIdx = visible.indexOf("hero");
   const heroProjAdjacent =
@@ -186,14 +191,14 @@ export default function Home({ variant }: { variant?: Variant }) {
 
     // ─── About ───
     about: () => (
-      <Tile variant="dark" eyebrow="ABOUT">
+      <Tile variant="parchment" eyebrow="ABOUT">
         <div className="about-grid">
           <div className="about-grid__desc">
             {aboutParas.map((para, i) => (
               <p
                 key={i}
                 className="text-body"
-                style={{ color: "var(--color-body-muted)", marginTop: i === 0 ? 0 : 14 }}
+                style={{ color: "var(--color-ink-muted-80)", marginTop: i === 0 ? 0 : 14 }}
               >
                 {para}
               </p>
@@ -205,7 +210,7 @@ export default function Home({ variant }: { variant?: Variant }) {
 
     // ─── How I Work ───
     how: () => (
-      <Tile variant="parchment" eyebrow="HOW I WORK" title="일하는 방식">
+      <Tile variant="parchment" eyebrow="HOW I WORK">
         <div className="competency-grid">
           {competencies.map((c) => (
             <div className="competency-card" key={c.title}>
@@ -227,7 +232,7 @@ export default function Home({ variant }: { variant?: Variant }) {
 
     // ─── Experience ───
     experience: () => (
-      <Tile variant="light" eyebrow="EXPERIENCE" title="이력">
+      <Tile variant="light" className="export-break-before" eyebrow="EXPERIENCE">
         <div className="exp-list">
           {EXPERIENCES.map((e) => (
             <div className="exp-row" key={e.company}>
@@ -290,48 +295,27 @@ export default function Home({ variant }: { variant?: Variant }) {
     ),
 
     // ─── Tools ───
+    // How I Work 다음에 이어지는 "다룰 수 있는 툴" 스킬셋. 주요/보조는 별도
+    // 헤더 없이 한 그리드에 합치고, 보조는 흐리게(--secondary) 처리로만 구분해
+    // 세로 높이를 최소화한다(인쇄 시 Overview가 툴 때문에 밀리지 않도록).
     tools: () => (
-      <Tile variant="dark" eyebrow="TOOLS" title="툴">
-        <div className="tools-section">
-          <div className="tools-group">
-            <p className="text-caption-strong tools-group__label">주요</p>
-            <div className="tools-grid">
-              {TOOLS_PRIMARY.map((t) => (
-                <div className="tool-chip" key={t.id}>
-                  <ToolIcon id={t.id} />
-                  <div className="tool-chip__text">
-                    <span className="text-caption-strong" style={{ color: "#fff" }}>
-                      {t.label}
-                    </span>
-                    <span className="text-fine-print" style={{ color: "var(--color-body-muted)" }}>
-                      {t.desc}
-                    </span>
-                  </div>
-                </div>
-              ))}
+      <Tile variant="parchment" eyebrow="TOOLS">
+        <div className="tools-grid">
+          {[
+            ...TOOLS_PRIMARY.map((t) => ({ ...t, secondary: false })),
+            ...TOOLS_SECONDARY.map((t) => ({ ...t, secondary: true })),
+          ].map((t) => (
+            <div
+              className={`tool-chip${t.secondary ? " tool-chip--secondary" : ""}`}
+              key={t.id}
+            >
+              <ToolIcon id={t.id} />
+              <div className="tool-chip__text">
+                <span className="text-caption-strong tool-chip__label">{t.label}</span>
+                <span className="text-fine-print tool-chip__desc">{t.desc}</span>
+              </div>
             </div>
-          </div>
-          <div className="tools-group">
-            <p className="text-caption-strong tools-group__label">보조</p>
-            <div className="tools-grid">
-              {TOOLS_SECONDARY.map((t) => (
-                <div className="tool-chip tool-chip--secondary" key={t.id}>
-                  <ToolIcon id={t.id} />
-                  <div className="tool-chip__text">
-                    <span
-                      className="text-caption-strong"
-                      style={{ color: "var(--color-body-muted)" }}
-                    >
-                      {t.label}
-                    </span>
-                    <span className="text-fine-print" style={{ color: "var(--color-ink-muted-48)" }}>
-                      {t.desc}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </Tile>
     ),

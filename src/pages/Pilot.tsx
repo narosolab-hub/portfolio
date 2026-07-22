@@ -20,12 +20,12 @@ export default function Pilot() {
         </h1>
         <p className="text-lead" style={{ color: "var(--color-ink-muted-80)", maxWidth: 640 }}>
           3종 다이어그램 검증용 페이지 — 애플 디자인 언어(단일 블루 액센트,
-          라이트/파치먼트/다크 타일 리듬)로 다시 잡았습니다.
+          라이트·파치먼트 타일 리듬)로 다시 잡았습니다.
         </p>
       </Tile>
 
       <Tile
-        variant="dark"
+        variant="parchment"
         eyebrow="대전제 — 권한 구조 재설계"
         title="자사도 외부 공급사와 같은 입점사로 분리해, 운영 모델을 하나로 통일했습니다"
         subcopy="자사를 관리자 예외로 둘지, Seller로 편입할지를 비교했습니다. 예외로 두면 브랜드가 늘 때마다 예외 로직이 반복되지만, Seller로 태우면 공통 흐름은 그대로 두고 자사 전용 정책만 예외로 분리할 수 있었습니다."

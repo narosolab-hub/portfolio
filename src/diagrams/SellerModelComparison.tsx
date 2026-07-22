@@ -5,7 +5,6 @@ const brands = ["자사", "입점사 A", "입점사 B", "입점사 C", "…"];
 export default function SellerModelComparison() {
   return (
     <div className="seller-model">
-      <p className="seller-model__tag text-tagline">자사·입점사 Seller 통합 구조</p>
       <div className="seller-viz">
       <div className="seller-viz__col seller-viz__col--reject">
         <p className="seller-viz__col-label text-caption-strong">

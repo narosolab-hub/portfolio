@@ -141,7 +141,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
       <Tile
         variant="parchment"
         eyebrow={sec("barcode").eyebrow ?? "PROJECT 02"}
-        title={sec("barcode").title ?? "AI로 표준바코드 매칭 업무 간소화 웹앱 개발"}
+        title={sec("barcode").title ?? "상품바코드 매칭 프로세스 개선 프로젝트"}
         subcopy={
           sec("barcode").subcopy ?? (
             <>
@@ -161,7 +161,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
             { k: "기여도", v: "100%" },
           ]}
         />
-        <PhaseLead>전사 차원에서 중요하지 않던 바코드 매칭 업무는 4개월째 백로그로 쌓였습니다.</PhaseLead>
+        <PhaseLead>중요도에 밀려 4개월간 쌓인 백로그를, 실데이터와 대조해 매칭 로직을 단계적으로 보완하며 해소했습니다.</PhaseLead>
         <AsIsList
           rows={[
             {
@@ -176,7 +176,6 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
             },
           ]}
         />
-        <PhaseLead>같은 코드지만 매칭이 지속 실패하는 원인을 실데이터와 대조하며 매칭 로직을 단계적으로 보완했습니다.</PhaseLead>
         <div className="sub-project__section">
           <SectionLabel>설계 판단</SectionLabel>
           <AsIsList
@@ -245,10 +244,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
       <Tile
         variant="light"
         eyebrow={sec("live").eyebrow ?? "PROJECT 03"}
-        title={
-          sec("live").title ??
-          "인천e몰 라이브커머스 시범 운영\n송출 불가 제약을 채널 분리로 우회한 신규 세일즈 채널 검증"
-        }
+        title={sec("live").title ?? "인천e몰 라이브커머스 시범 운영 프로젝트"}
         subcopy={
           sec("live").subcopy ?? (
             <>
@@ -268,7 +264,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
             { k: "기여도", v: "기획 50% (실행 협업)" },
           ]}
         />
-        <PhaseLead>라이브커머스가 필요했지만 앱은 자체 송출이 불가능한 구조였습니다</PhaseLead>
+        <PhaseLead>라이브커머스가 필요했지만 앱인앱 구조라 앱 내 자체 송출이 불가능했습니다.</PhaseLead>
         <AsIsList
           rows={[
             { k: "기술 제약", v: "앱인앱 구조로 앱 내 자체 라이브 송출 불가" },
@@ -282,14 +278,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
             },
           ]}
         />
-        <PhaseLead>개발 대신 채널을 분리했습니다 — 시청은 밖에서, 결제는 안에서</PhaseLead>
-        <div className="sub-project__section">
-          <SectionLabel>판단</SectionLabel>
-          <p className="text-body" style={{ color: "var(--color-ink-muted-80)" }}>
-            시청·소통은 외부(유튜브), 결제·데이터는 내부(자사몰)로 나눠 기능 개발 대신 채널
-            조합으로 문제를 풀었습니다.
-          </p>
-        </div>
+        <PhaseLead>시청·소통은 외부(유튜브), 결제·데이터는 내부(자사몰)로 나눠 기능 개발 대신 채널 조합으로 문제를 풀었습니다.</PhaseLead>
         <ScreenshotGallery
           images={[
             {
@@ -316,11 +305,9 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
       {/* PROJECT 04 — 복지플랫폼 마이페이지 */}
       <Tile
         variant="parchment"
+        className="export-break-before"
         eyebrow={sec("mypage").eyebrow ?? "PROJECT 04"}
-        title={
-          sec("mypage").title ??
-          "복지플랫폼 마이페이지 개편\n반복 VoC를 핵심 재화 접근성 문제로 재정의해 IA/UXUI 전면 개편"
-        }
+        title={sec("mypage").title ?? "복지플랫폼 마이페이지 IA·UX 개편 프로젝트"}
         subcopy={
           sec("mypage").subcopy ?? (
             <>
@@ -340,9 +327,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
             { k: "기여도", v: "기획 100%" },
           ]}
         />
-        <PhaseLead>
-          주 1~3회 반복되던 포인트 문의를 단순 문의가 아니라 접근성 문제로 판단했습니다.
-        </PhaseLead>
+        <PhaseLead>주 1~3회 반복되던 포인트 문의를 단순 문의가 아니라 접근성 문제로 재정의했습니다.</PhaseLead>
         <AsIsList
           rows={[
             { k: "Why?", v: "포인트가 모바일 웹에서만 노출 → 앱 위주 사용자는 확인 불가" },
@@ -352,15 +337,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
             },
           ]}
         />
-        <PhaseLead>문의가 생기지 않는 구조를 만들었습니다.</PhaseLead>
-        <div className="sub-project__section">
-          <SectionLabel>레퍼런스 분석 — '포인트·이커머스' 12개 플랫폼</SectionLabel>
-          <p className="text-body" style={{ color: "var(--color-ink-muted-80)" }}>
-            [3가지 공통점 도출] ① 메인 1 Depth에 포인트 현황 요약 ② 상세 페이지에서
-            히스토리 제공 ③ 메뉴 통폐합으로 구조화된 UX/UI → 다만 기능을 그대로 복제하지 않고 "왜 그
-            위치·구조인가"를 분석해 적용했습니다.
-          </p>
-        </div>
+        <PhaseLead>'포인트·이커머스' 12개 플랫폼을 레퍼런스로 분석해 공통 패턴(메인 상단 요약 · 상세 히스토리 · 메뉴 통폐합)을 '왜 그 위치·구조인가' 관점에서 적용해, 문의가 생기지 않는 구조로 재설계했습니다.</PhaseLead>
         <div className="sub-project__section">
           <SectionLabel>구현 기능</SectionLabel>
           <AsIsList
