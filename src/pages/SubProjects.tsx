@@ -39,14 +39,6 @@ function SectionLabel({ children, dark = false }: { children: string; dark?: boo
   );
 }
 
-function PhaseLead({ children, dark = false }: { children: string; dark?: boolean }) {
-  return (
-    <div className={`phase-lead${dark ? " phase-lead--dark" : ""}`}>
-      <p className="phase-lead__text">{children}</p>
-    </div>
-  );
-}
-
 function StatusTable({
   rows,
   dark = false,
