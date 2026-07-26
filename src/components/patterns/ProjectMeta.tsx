@@ -12,7 +12,7 @@ export default function ProjectMeta({
       {items.map((item) => (
         <div className="project-meta__item" key={item.k}>
           <span className="project-meta__k text-caption">{item.k}</span>
-          <span className="project-meta__v text-caption-strong">{item.v}</span>
+          <span className="project-meta__v text-caption">{item.v}</span>
         </div>
       ))}
     </div>

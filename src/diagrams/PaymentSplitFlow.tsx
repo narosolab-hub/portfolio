@@ -107,10 +107,10 @@ export default function PaymentSplitFlow() {
         <span>PG 결제대금 중 공급사에 지급한 정산금 제외 금액 자사 계좌로 수취</span>
       </div>
       <p className="pay-split__footer text-caption">
-        PG 신고 명의는 자사 단일 사업자로 일괄 처리되지만,
+        PG 결제대금은 자사 명의로 일괄 신고되나,
         <br />
-        실제 자사 매출은 <strong>수수료뿐</strong>이며 나머지 정산대금은 지급대행을 통해{" "}
-        <strong>공급사에게 직접</strong> 전달됩니다.
+        실제 자사 매출은 <strong>1P 매출 및 수수료에 한정</strong>되며 3P 정산대금은 PG 지급대행을 통해{" "}
+        <strong>공급사에 지급</strong>
       </p>
       <div className="pay-split__review">
         <span className="pay-split__review-label text-caption-strong">

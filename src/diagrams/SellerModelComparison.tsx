@@ -21,7 +21,7 @@ export default function SellerModelComparison() {
           ))}
         </div>
         <p className="seller-viz__caption text-caption">
-          브랜드가 늘 때마다 예외 운영·정산 로직이 <strong>매번 새로 추가</strong>됩니다
+          신규 브랜드 입점 시 <strong>예외 로직 반복 발생</strong>
         </p>
       </div>
 
@@ -47,7 +47,7 @@ export default function SellerModelComparison() {
           <strong>B2B 등급 할인</strong>
         </div>
         <p className="seller-viz__caption text-caption">
-          브랜드가 몇 개로 늘어도 <strong>공통 흐름은 그대로</strong> 계정만 추가됩니다
+          단일 흐름 유지, 브랜드 추가 시 <strong>계정만 신설</strong>
         </p>
       </div>
       </div>

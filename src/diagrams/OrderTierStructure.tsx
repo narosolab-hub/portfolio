@@ -4,12 +4,12 @@ const rejected = [
   {
     title: "결제 → 배송지 묶음",
     steps: ["결제", "배송지 묶음"],
-    blockedAt: "묶음 안 개별 상품 부분 출고·취소 불가",
+    blockedAt: "하위 단위(개별 상품)의 부분 출고 및 취소 처리 한계",
   },
   {
     title: "결제 → 개별 상품",
     steps: ["결제", "개별 상품"],
-    blockedAt: "출고지·묶음배송 기준 배송비·정산 계산 불가",
+    blockedAt: "출고지 및 묶음배송 기반의 배송비·정산 산정 한계",
   },
 ];
 
@@ -59,7 +59,7 @@ export default function OrderTierStructure() {
       </div>
 
       <div className="tier-viz__connector">
-        <span>2단계로는 편의·부분처리·정산을 동시에 못 맞춤</span>
+        <span>기존 2단계 구조 한계: 구매 편의, 부분 처리, 정산 요건의 동시 충족 불가</span>
         <span className="tier-viz__connector-arrow">↓</span>
       </div>
 

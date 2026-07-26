@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import "./QAPriorityBreakdown.css";
 
 export type QAPriorityItem = {
@@ -12,15 +13,23 @@ export type QAPhaseRow = {
   example: string;
 };
 
+export type QAStrategyRow = {
+  severity: string;
+  criteria: string;
+  action: string;
+};
+
 export default function QAPriorityBreakdown({
   title,
   items,
+  strategyRows,
   phaseIntro,
   phaseRows,
 }: {
   title: string;
   items: QAPriorityItem[];
-  phaseIntro?: string;
+  strategyRows?: QAStrategyRow[];
+  phaseIntro?: ReactNode;
   phaseRows?: QAPhaseRow[];
 }) {
   const max = Math.max(...items.map((i) => i.count));
@@ -50,21 +59,42 @@ export default function QAPriorityBreakdown({
 
         <div className="qa-priority__table-wrap">
           <table className="qa-priority__table">
-            <tbody>
-              {items.map((item) => (
-                <tr key={item.label}>
-                  <td className="qa-priority__table-label">{item.label}</td>
-                  <td>{item.description}</td>
-                </tr>
-              ))}
-            </tbody>
+            {strategyRows ? (
+              <>
+                <thead>
+                  <tr>
+                    <th className="qa-priority__table-label">심각도</th>
+                    <th>판단 기준</th>
+                    <th>대응 전략</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {strategyRows.map((row) => (
+                    <tr key={row.severity}>
+                      <td className="qa-priority__table-label">{row.severity}</td>
+                      <td>{row.criteria}</td>
+                      <td>{row.action}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </>
+            ) : (
+              <tbody>
+                {items.map((item) => (
+                  <tr key={item.label}>
+                    <td className="qa-priority__table-label">{item.label}</td>
+                    <td>{item.description}</td>
+                  </tr>
+                ))}
+              </tbody>
+            )}
           </table>
         </div>
       </div>
 
       {(phaseIntro || phaseRows) && (
         <div className="qa-priority__phase">
-          {phaseIntro && <p className="qa-priority__phase-intro text-body">{phaseIntro}</p>}
+          {phaseIntro && <div className="qa-priority__phase-intro text-body">{phaseIntro}</div>}
           {phaseRows && (
             <div className="qa-priority__phase-table-wrap">
               <table className="qa-priority__phase-table">
@@ -75,9 +105,9 @@ export default function QAPriorityBreakdown({
                 </colgroup>
                 <thead>
                   <tr>
-                    <th>구분</th>
-                    <th>판단 기준</th>
-                    <th>예시</th>
+                    <th>배포 단계 (Phase)</th>
+                    <th>오픈 요건 (목표)</th>
+                    <th>주요 범위 (상세 내역)</th>
                   </tr>
                 </thead>
                 <tbody>

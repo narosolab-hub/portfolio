@@ -65,6 +65,11 @@
   gap: 14px;
 }
 
+/* 스펙 요약(ProjectMeta) 다음 첫 상세 섹션은 여백을 더 줘 시각적으로 분리 */
+.project-meta + .sub-project__section {
+  margin-top: 20px;
+}
+
 .sub-project__label {
   color: var(--color-primary);
   letter-spacing: 0.02em;

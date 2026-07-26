@@ -1,15 +1,9 @@
 .project-meta {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
   border-top: 1px solid var(--color-hairline);
   border-bottom: 1px solid var(--color-hairline);
-}
-@media (max-width: 700px) {
-  .project-meta {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 .project-meta--dark {
   border-color: rgba(255, 255, 255, 0.16);
@@ -17,18 +11,39 @@
 
 .project-meta__item {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--color-hairline);
 }
+.project-meta--dark .project-meta__item {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+.project-meta__item:last-child {
+  border-bottom: none;
+}
+
 .project-meta__k {
+  flex: 0 0 104px;
   color: var(--color-ink-muted-48);
 }
 .project-meta--dark .project-meta__k {
   color: var(--color-body-muted);
 }
-.project-meta__v {
+
+.project-meta .project-meta__v {
+  flex: 1;
   color: var(--color-ink);
+  font-size: 13px;
+  line-height: 1.5;
 }
 .project-meta--dark .project-meta__v {
   color: #fff;
+}
+
+@media (max-width: 480px) {
+  .project-meta__k {
+    flex-basis: 88px;
+  }
 }

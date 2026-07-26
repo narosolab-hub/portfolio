@@ -130,10 +130,12 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
 
       <Tile variant="light">
         <p className="tile__eyebrow text-caption-strong">SUB PROJECTS</p>
-        <h1 className="text-section-heading">{ov?.intro?.title ?? "서브 프로젝트 3건"}</h1>
-        <p className="text-body" style={{ color: "var(--color-ink-muted-80)", maxWidth: 640 }}>
+        <h1 className="text-section-heading">
+          {ov?.intro?.title ?? "각기 다른 제약 속에서 근본적인 문제를 해결한 서브 프로젝트"}
+        </h1>
+        <p className="text-body" style={{ color: "var(--color-ink-muted-80)" }}>
           {ov?.intro?.body ??
-            "각각 다른 제약 속에서 문제를 정의하고 풀어낸 세 프로젝트입니다. 영업팀의 반복 바코드 매칭은 자동화 웹앱으로, 앱인앱의 라이브 송출 제약은 유튜브·자사몰 채널 분리로, 반복되던 복지포인트 문의는 마이페이지 개편으로 해결했습니다."}
+            "오프라인 영업 확장에 따른 수기 바코드 매칭은 자동화 웹앱 개발로 해소하고, 앱인앱 환경의 라이브 송출 제약은 채널 분할을 통해 단기간에 매출을 창출했으며, 반복되던 복지포인트 문의는 UX 개편으로 원인을 근본적으로 해결했습니다."}
         </p>
       </Tile>
 
@@ -141,56 +143,60 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
       <Tile
         variant="parchment"
         eyebrow={sec("barcode").eyebrow ?? "PROJECT 02"}
-        title={sec("barcode").title ?? "상품바코드 매칭 프로세스 개선 프로젝트"}
+        title={sec("barcode").title ?? "상품바코드 매칭 프로세스 개선: 2시간 수기 작업을 10분으로 단축"}
         subcopy={
           sec("barcode").subcopy ?? (
             <>
-              오프라인 영업 확대로 표준바코드(코리아넷) 관리가 필요해졌지만 온라인 중심 사업 구조상
-              사내 시스템에는 임시 바코드만 등록돼 있었습니다. 수기로 처리하기엔 번거로운 작업이 많아
-              간소화 툴을 직접 만들어 <strong>2시간 넘게 걸리던 대조 작업을 10분 내외</strong>로 줄이고
-              월 100여 건을 상시 처리하고 있습니다.
+              오프라인 영업 확대로 표준바코드(코리아넷) 관리가 필수적이었으나, 온라인 중심 시스템의
+              데이터 불일치로 1건당 수기 대조가 필요했습니다. 사내 IT 리소스가 부족한 상황에서{" "}
+              <strong>AI를 활용해 자동화 툴을 직접 개발</strong>했습니다. 상품명 표기 차이 등의 예외를
+              정규화하고 유사코드 추천 로직을 반영해, 2시간 이상 소요되던 대조 작업을{" "}
+              <strong>10분 내외로 단축</strong>했습니다. 이를 통해 4개월간 방치되었던{" "}
+              <strong>1,000건 이상의 백로그를 전면 해소</strong>했습니다.
             </>
           )
         }
       >
         <ProjectMeta
           items={[
-            { k: "프로젝트 기간", v: "1주" },
-            { k: "담당 역할", v: "문제 정의 · 매칭 로직 설계 · 웹앱 개발" },
-            { k: "팀 구성", v: "단독 수행" },
+            { k: "프로젝트 기간", v: "1주 (단기 스프린트)" },
+            { k: "담당 역할", v: "문제 정의 및 매칭 로직 설계, 자동화 웹앱 자체 개발" },
+            { k: "팀 구성", v: "1인 단독 수행" },
             { k: "기여도", v: "100%" },
           ]}
         />
-        <PhaseLead>중요도에 밀려 4개월간 쌓인 백로그를, 실데이터와 대조해 매칭 로직을 단계적으로 보완하며 해소했습니다.</PhaseLead>
-        <AsIsList
-          rows={[
-            {
-              k: "수기 프로세스",
-              v: "코리아넷 엑셀 다운 → 사내 시스템 재고현황목록 다운 → 상품코드 기반 수기 매핑 → 바코드 추출 → 재업로드",
-            },
-            { k: "매칭 불가", v: "두 시스템 간 상품명·코드 표기 상이(오타, 숫자 누락)로 매핑 실패 건 다수 발생" },
-            { k: "백로그", v: "약 5,000 SKU 대조 2시간+ → 작업 포기 → 4개월간 약 1,000건 방치" },
-            {
-              k: "리소스 제약",
-              v: "사내 IT개발팀 리소스 한계로 AI(GPT·Claude)를 활용해 직접 개발",
-            },
-          ]}
-        />
+        <div className="sub-project__section">
+          <SectionLabel>문제 · 현황</SectionLabel>
+          <AsIsList
+            rows={[
+              {
+                k: "수기 프로세스",
+                v: "코리아넷·사내 재고 엑셀 다운로드 → 상품명 기준 엑셀 데이터 가공 및 매핑 → 누락 및 불일치 데이터 수기 대조·확인 → 바코드 추출 및 시스템 재업로드",
+              },
+              { k: "매칭 불가", v: "두 시스템 간 상품명·코드 표기 상이(오타, 숫자 누락)로 매핑 실패 건 다수 발생" },
+              { k: "백로그", v: "약 5,000 SKU 대조 2시간+ → 작업 포기 → 4개월간 약 1,000건 방치" },
+              {
+                k: "리소스 제약",
+                v: "사내 IT개발팀 리소스 한계로 AI(GPT·Claude)를 활용해 직접 개발",
+              },
+            ]}
+          />
+        </div>
         <div className="sub-project__section">
           <SectionLabel>설계 판단</SectionLabel>
           <AsIsList
             rows={[
               {
                 k: "매칭 키 선정",
-                v: "상품명은 띄어쓰기·표현 차이로 같은 상품도 불일치 → 상품명 끝에 반복되는 상품코드를 실제 매칭 키로 확정",
+                v: "띄어쓰기·표현 차이 한계 극복 → 상품명 끝 고유 코드를 매칭 키로 확정",
               },
               {
                 k: "입력값 정규화",
-                v: "오타·공백·특수문자 등 예외를 정규화 규칙으로 흡수해 같은 코드가 어긋나지 않도록 처리",
+                v: "오타·공백·특수문자 등 예외 케이스를 정규화하여 매칭률 상향",
               },
               {
                 k: "유사코드 추천",
-                v: "정규화로도 안 잡히는 오타는 유사코드를 자동 추천 (예: S2500960 vs S2500690)",
+                v: "정규화 범위를 벗어난 오타는 유사코드 자동 추천 로직 적용 (예: S2500960 vs S2500690)",
               },
               {
                 k: "패턴 누적",
@@ -199,23 +205,26 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
             ]}
           />
         </div>
-        <StepFlow
-          steps={[
-            "사내 시스템 재고현황목록 다운",
-            "코리아넷 표준바코드 파일 다운",
-            "매칭 사이트 업로드·자동 매칭",
-            "사내 시스템 표준바코드 등록",
-          ]}
-        />
-        <ScreenshotGallery
-          images={[
-            { src: uploadScreen, caption: "코리아넷·사내 시스템 재고현황 엑셀을 업로드하는 매칭 시작 화면" },
-            {
-              src: resultScreen,
-              caption: "3개 상태로 분류된 매칭 결과 화면",
-            },
-          ]}
-        />
+        <div className="sub-project__section">
+          <SectionLabel>프로세스 개선</SectionLabel>
+          <StepFlow
+            steps={[
+              "사내 시스템 재고현황목록 다운",
+              "코리아넷 표준바코드 파일 다운",
+              "매칭 사이트 업로드·자동 매칭",
+              "사내 시스템 표준바코드 등록",
+            ]}
+          />
+          <ScreenshotGallery
+            images={[
+              { src: uploadScreen, caption: "코리아넷·사내 시스템 재고현황 엑셀을 업로드하는 매칭 시작 화면" },
+              {
+                src: resultScreen,
+                caption: "3개 상태로 분류된 매칭 결과 화면",
+              },
+            ]}
+          />
+        </div>
         <div className="sub-project__section">
           <SectionLabel>상태값 3분류</SectionLabel>
           <StatusTable
@@ -244,50 +253,57 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
       <Tile
         variant="light"
         eyebrow={sec("live").eyebrow ?? "PROJECT 03"}
-        title={sec("live").title ?? "인천e몰 라이브커머스 시범 운영 프로젝트"}
+        title={sec("live").title ?? "라이브커머스 시범 운영: 채널 분할 전략으로 3,900만 원 매출 달성"}
         subcopy={
           sec("live").subcopy ?? (
             <>
-              <strong>226만</strong>이 이용하는 인천 시민 지역몰의 이커머스 활성화를 위해 라이브커머스
-              시범 운영이 필요했습니다. 목표는 <strong>큰 개발 없이</strong> 실제 구매까지 이어지는
-              라이브커머스가 가능한지 검증하는 것이었습니다. 앱인앱 송출 제약은 유튜브를 송출 채널로
-              삼아 우회했고 <strong>4회 방송으로 약 3,900만원 매출</strong>을 냈습니다.
+              인천 시민 지역몰(가입자 <strong>226만</strong>)의 이커머스 활성화를 위한 라이브커머스
+              시범 사업입니다. 대규모 개발 투자 없이 실제 구매 전환이 가능한지 검증하는 것이 핵심
+              목표였습니다. 앱인앱 구조상 앱 내 자체 스트리밍 인프라 구축이 불가능했기에, 시청·소통은
+              유튜브(외부 채널), 결제·데이터는 자사몰(내부 플랫폼)로 나누는{" "}
+              <strong>'채널 분할' 전략</strong>으로 우회했습니다. 그 결과 단{" "}
+              <strong>4회 방송으로 약 3,900만 원</strong>의 매출을 달성하며 비즈니스 가능성을
+              입증했습니다.
             </>
           )
         }
       >
         <ProjectMeta
           items={[
-            { k: "프로젝트 기간", v: "1개월" },
-            { k: "담당 역할", v: "라이브커머스 운영 기획 · 채널 플로우 설계 · 편성 전략" },
-            { k: "팀 구성", v: "전략기획팀 2인 · MD팀 1인 · 개발팀 1인 · 디자인팀 1인" },
-            { k: "기여도", v: "기획 50% (실행 협업)" },
+            { k: "프로젝트 기간", v: "2021.06 ~ 2021.07 (1개월, 시범 운영)" },
+            { k: "담당 역할", v: "운영 기획, 채널 플로우(유튜브+자사몰) 설계, 방송 편성 전략 수립" },
+            { k: "팀 구성", v: "전략기획 2명, MD 1명, 개발 1명, 디자인 1명" },
+            { k: "기여도", v: "기획 50% (실행 협업 리드)" },
           ]}
         />
-        <PhaseLead>라이브커머스가 필요했지만 앱인앱 구조라 앱 내 자체 송출이 불가능했습니다.</PhaseLead>
-        <AsIsList
-          rows={[
-            { k: "기술 제약", v: "앱인앱 구조로 앱 내 자체 라이브 송출 불가" },
-            {
-              k: "비즈니스 제약",
-              v: "지역화폐 결제·프로모션 성과 측정·매출 집계 때문에 최종 결제는 반드시 자사몰 내부 필요",
-            },
-            {
-              k: "인프라·채널 제약",
-              v: "자체 스트리밍 인프라 구축은 과한 투자였고 네이버 등 외부 라이브 채널은 해당 채널 안에서만 구매 전환이 강제됨",
-            },
-          ]}
-        />
-        <PhaseLead>시청·소통은 외부(유튜브), 결제·데이터는 내부(자사몰)로 나눠 기능 개발 대신 채널 조합으로 문제를 풀었습니다.</PhaseLead>
-        <ScreenshotGallery
-          images={[
-            {
-              src: flowLogicScreen,
-              caption:
-                "라이브커머스 구좌 진입 → CTA로 유튜브 방송 랜딩 → 실시간 채팅 이벤트 참여 → 채팅창 고정 링크로 상품 상세 랜딩까지 이어지는 실제 UX 흐름",
-            },
-          ]}
-        />
+        <div className="sub-project__section">
+          <SectionLabel>제약 조건</SectionLabel>
+          <AsIsList
+            rows={[
+              { k: "기술 제약", v: "앱인앱 구조로 앱 내 자체 라이브 송출 불가" },
+              {
+                k: "비즈니스 제약",
+                v: "지역화폐 결제·프로모션 성과 측정·매출 집계 때문에 최종 결제는 반드시 자사몰 내부 필요",
+              },
+              {
+                k: "인프라·채널 제약",
+                v: "자체 스트리밍 인프라 구축은 과한 투자였고 네이버 등 외부 라이브 채널은 해당 채널 안에서만 구매 전환이 강제됨",
+              },
+            ]}
+          />
+        </div>
+        <div className="sub-project__section">
+          <SectionLabel>해결 · 채널 분할 흐름</SectionLabel>
+          <ScreenshotGallery
+            images={[
+              {
+                src: flowLogicScreen,
+                caption:
+                  "라이브커머스 구좌 진입 → CTA로 유튜브 방송 랜딩 → 실시간 채팅 이벤트 참여 → 채팅창 고정 링크로 상품 상세 랜딩까지 이어지는 실제 UX 흐름",
+              },
+            ]}
+          />
+        </div>
         <div className="sub-project__section">
           <SectionLabel>타겟 & 편성 근거</SectionLabel>
           <AsIsList
@@ -307,14 +323,16 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
         variant="parchment"
         className="export-break-before"
         eyebrow={sec("mypage").eyebrow ?? "PROJECT 04"}
-        title={sec("mypage").title ?? "복지플랫폼 마이페이지 IA·UX 개편 프로젝트"}
+        title={sec("mypage").title ?? "복지플랫폼 마이페이지 개편: UX/IA 재설계로 관련 문의 0건 달성"}
         subcopy={
           sec("mypage").subcopy ?? (
             <>
-              임직원이 지급받은 복지포인트로 상품을 구매하는 B2B 복지몰입니다. 사용자 대다수가 모바일
-              앱을 썼지만 핵심 기능인 복지포인트 현황은 모바일 웹에서만 노출되는 구조였습니다.
-              마이페이지 개편으로 접근성 문제를 풀어 런칭 전 <strong>주 1~3회</strong> 꾸준히 인입되던
-              복지포인트 문의가 <strong>런칭 후 0건</strong>으로 줄었습니다.
+              B2B 복지몰 특성상 복지포인트 관리가 핵심 기능이나, 모바일 앱 사용자가 대다수임에도
+              포인트 현황은 웹에서만 확인 가능한 구조적 한계가 있었습니다. 이를 단순 CS 인입이 아닌{" "}
+              <strong>UI/UX 접근성 문제로 재정의</strong>하고, 12개 주요 커머스 플랫폼의 패턴을 분석해
+              사용자가 묻기 전에 직관적으로 확인(상단 요약, 상세 히스토리, 메뉴 통폐합)할 수 있는 구조로
+              마이페이지를 재설계했습니다. 그 결과 <strong>주 1~3회</strong> 꾸준히 발생하던 포인트 관련
+              문의를 <strong>런칭 후 0건</strong>으로 근절했습니다.
             </>
           )
         }
@@ -322,22 +340,23 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
         <ProjectMeta
           items={[
             { k: "프로젝트 기간", v: "2022.01 ~ 2022.02 (2개월)" },
-            { k: "담당 역할", v: "UX 개선점 도출 · 타사 레퍼런스 조사 · UXUI 기획" },
-            { k: "팀 구성", v: "전략기획팀 1명 · 디자인팀 1명 · 개발팀 1명" },
-            { k: "기여도", v: "기획 100%" },
+            { k: "담당 역할", v: "CS 데이터 기반 문제 재정의, 타사 레퍼런스 분석, IA·UX/UI 기획" },
+            { k: "팀 구성", v: "전략기획 1명, 디자인 1명, 개발 1명" },
+            { k: "기여도", v: "기획 100% (단독 기획)" },
           ]}
         />
-        <PhaseLead>주 1~3회 반복되던 포인트 문의를 단순 문의가 아니라 접근성 문제로 재정의했습니다.</PhaseLead>
-        <AsIsList
-          rows={[
-            { k: "Why?", v: "포인트가 모바일 웹에서만 노출 → 앱 위주 사용자는 확인 불가" },
-            {
-              k: "What?",
-              v: "① 언제, 왜 지급·회수되었는지 ② 언제, 왜 사용했는지 (잔액만이 아니라 히스토리 수요 확인)",
-            },
-          ]}
-        />
-        <PhaseLead>'포인트·이커머스' 12개 플랫폼을 레퍼런스로 분석해 공통 패턴(메인 상단 요약 · 상세 히스토리 · 메뉴 통폐합)을 '왜 그 위치·구조인가' 관점에서 적용해, 문의가 생기지 않는 구조로 재설계했습니다.</PhaseLead>
+        <div className="sub-project__section">
+          <SectionLabel>문제 정의</SectionLabel>
+          <AsIsList
+            rows={[
+              { k: "현상", v: "포인트가 모바일 웹에서만 노출 → 앱 위주 사용자는 확인 불가" },
+              {
+                k: "진짜 문제",
+                v: "① 언제, 왜 지급·회수되었는지 ② 언제, 왜 사용했는지 (잔액만이 아니라 히스토리 수요 확인)",
+              },
+            ]}
+          />
+        </div>
         <div className="sub-project__section">
           <SectionLabel>구현 기능</SectionLabel>
           <AsIsList
