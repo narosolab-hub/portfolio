@@ -219,15 +219,22 @@ export default function Home({ variant }: { variant?: Variant }) {
       <Tile variant="parchment" eyebrow="ABOUT">
         <div className="about-grid">
           <div className="about-grid__desc">
-            {aboutParas.map((para, i) => (
-              <p
-                key={i}
-                className="text-body"
-                style={{ color: "var(--color-ink-muted-80)", marginTop: i === 0 ? 0 : 14 }}
-              >
-                {renderEmphasis(para)}
-              </p>
-            ))}
+            {aboutParas.map((para, i) =>
+              // "## " 접두사가 붙은 항목은 About 중간 소제목(예: WHY TOSS PAYMENTS?)으로 렌더
+              para.startsWith("## ") ? (
+                <p key={i} className="about-subhead text-caption-strong">
+                  {para.slice(3)}
+                </p>
+              ) : (
+                <p
+                  key={i}
+                  className="text-body"
+                  style={{ color: "var(--color-ink-muted-80)", marginTop: i === 0 ? 0 : 14 }}
+                >
+                  {renderEmphasis(para)}
+                </p>
+              ),
+            )}
           </div>
         </div>
       </Tile>
