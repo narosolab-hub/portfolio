@@ -26,11 +26,11 @@ export default function B2BProject({ variant }: { variant?: Variant }) {
       <Tile variant="light">
         <p className="tile__eyebrow text-caption-strong">MAIN PROJECT 01 — B2B 플랫폼 전환</p>
         <h1 className="text-section-heading" style={{ maxWidth: 640 }}>
-          {ov?.intro?.title ?? "입점형 플랫폼 전환 구축 프로젝트"}
+          {ov?.intro?.title ?? "입점형 B2B 도매 플랫폼 전환 프로젝트"}
         </h1>
         <p className="text-body" style={{ color: "var(--color-ink-muted-80)" }}>
           {ov?.intro?.body ??
-            "연 거래액 24억 규모의 자사 직판(1P) B2B몰을 외부 공급사 입점이 가능한 1P·3P 혼합 플랫폼으로 전환했습니다. 회원가입부터 상품, 주문, 결제, 정산에 이르는 커머스 전체의 거래 흐름과 운영 기준을 처음부터 다시 설계했습니다."}
+            "연 거래액 24억 규모의 자사 직판 B2B몰을 외부 공급사 입점이 가능한 1P·3P 혼합 플랫폼으로 전환하며, 회원가입부터 상품·주문·결제·정산까지 이어지는 거래 흐름과 운영 기준을 재설계했습니다."}
         </p>
         <ProjectMeta
           items={[
@@ -110,7 +110,7 @@ export default function B2BProject({ variant }: { variant?: Variant }) {
               처리가 반복되는 문제가 있었습니다. 이를 해결하기 위해 자사 역시 외부 공급사와 동일한{" "}
               <strong>판매자(Seller) 모델로 편입</strong>했습니다. 수수료 0%나 B2B 등급 할인 등
               자사에만 필요한 기능은 정책 예외로 분리하여 불필요한 예외 처리가 발생하지 않는{" "}
-              <strong>단일 운영 모델</strong>을 구축했습니다.
+              <strong>단일 운영 모델</strong>을 설계했습니다.
             </>
           )
         }
@@ -198,7 +198,7 @@ export default function B2BProject({ variant }: { variant?: Variant }) {
       <Tile
         variant="light"
         eyebrow={sec("e2e-qa").eyebrow ?? "운영 가능성 검증 · E2E QA 설계"}
-        title={sec("e2e-qa").title ?? "거래 흐름 기반 E2E QA로 리스크 134건 선제 발견 및 조치"}
+        title={sec("e2e-qa").title ?? "거래 흐름 기반 E2E QA로 리스크 134건 선제 발견 및 대응 기준 수립"}
         subcopy={
           sec("e2e-qa").subcopy ?? (
             <>
