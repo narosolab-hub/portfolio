@@ -139,12 +139,12 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
         subcopy={
           sec("barcode").subcopy ?? (
             <>
-              오프라인 영업 확대로 표준바코드(코리아넷) 관리가 필수적이었으나, 온라인 중심 시스템의
-              데이터 불일치로 1건당 수기 대조가 필요했습니다. 사내 IT 리소스가 부족한 상황에서{" "}
-              <strong>AI를 활용해 자동화 툴을 직접 개발</strong>했습니다. 상품명 표기 차이 등의 예외를
-              정규화하고 유사코드 추천 로직을 반영해, 2시간 이상 소요되던 대조 작업을{" "}
-              <strong>10분 내외로 단축</strong>했습니다. 이를 통해 4개월간 방치되었던{" "}
-              <strong>1,000건 이상의 백로그를 전면 해소</strong>했습니다.
+              오프라인 영업 확대로 표준바코드(코리아넷) 관리가 필수적이었으나 상품코드의 오타·공백·숨은
+              문자로 두 시스템 간 매칭이 어긋나 반복 수기 검수가 필요했습니다. 이를{" "}
+              <strong>데이터 정합성 문제로 정의</strong>하고 사내 IT 리소스가 부족한 상황에서{" "}
+              <strong>AI를 활용해 자동화 툴을 직접 개발</strong>했습니다. 상품코드 정규화와 유사코드 추천
+              로직을 반영해 매번 2시간 이상 걸리던 대조 작업을 <strong>10분 내외로 단축</strong>하고{" "}
+              <strong>월 약 100건을 상시 처리하는 운영 프로세스로 전환</strong>했습니다.
             </>
           )
         }
@@ -162,14 +162,16 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
           <AsIsList
             rows={[
               {
-                k: "수기 프로세스",
-                v: "코리아넷·사내 재고 엑셀 다운로드 → 상품명 기준 엑셀 데이터 가공 및 매핑 → 누락 및 불일치 데이터 수기 대조·확인 → 바코드 추출 및 시스템 재업로드",
+                k: "수기 검수",
+                v: "2개의 엑셀 파일을 상품명 기준으로 가공하여 누락·불일치 건을 수기 검수하는 반복 작업에 매번 2시간 이상 소요",
               },
-              { k: "매칭 불가", v: "두 시스템 간 상품명·코드 표기 상이(오타, 숫자 누락)로 매핑 실패 건 다수 발생" },
-              { k: "백로그", v: "약 5,000 SKU 대조 2시간+ → 작업 포기 → 4개월간 약 1,000건 방치" },
+              {
+                k: "매칭 누락",
+                v: "상품코드의 오타·공백·숨은 문자로 두 시스템 간 표준바코드 매칭이 어긋나는 데이터 정합성 문제",
+              },
               {
                 k: "리소스 제약",
-                v: "사내 IT개발팀 리소스 한계로 AI(GPT·Claude)를 활용해 직접 개발",
+                v: "사내 IT 개발팀 리소스 한계로 프로세스 개선 요청 불가 → AI(ChatGPT, Claude) 기반 자동 매칭 웹앱 구현",
               },
             ]}
           />
@@ -184,7 +186,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
               },
               {
                 k: "입력값 정규화",
-                v: "오타·공백·특수문자 등 예외 케이스를 정규화하여 매칭률 상향",
+                v: "오타·공백·숨은 문자 등 예외 케이스를 정규화하여 매칭률 상향",
               },
               {
                 k: "유사코드 추천",
@@ -201,10 +203,10 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
           <SectionLabel>프로세스 개선</SectionLabel>
           <StepFlow
             steps={[
-              "사내 시스템 재고현황목록 다운",
-              "코리아넷 표준바코드 파일 다운",
-              "매칭 사이트 업로드·자동 매칭",
-              "사내 시스템 표준바코드 등록",
+              "사내 시스템 엑셀 파일 다운",
+              "코리아넷 엑셀 파일 다운",
+              "매칭 사이트 업로드 및 매칭",
+              "결과 검수 후 사내 시스템 업로드",
             ]}
           />
           <ScreenshotGallery
@@ -251,7 +253,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
             <>
               인천 시민 지역몰(가입자 <strong>226만</strong>)의 이커머스 활성화를 위한 라이브커머스
               시범 사업입니다. 대규모 개발 투자 없이 실제 구매 전환이 가능한지 검증하는 것이 핵심
-              목표였습니다. 앱인앱 구조상 앱 내 자체 스트리밍 인프라 구축이 불가능했기에, 시청·소통은
+              목표였습니다. 앱인앱 구조상 앱 내 자체 스트리밍 인프라 구축은 어려웠기 때문에, 시청·소통은
               유튜브(외부 채널), 결제·데이터는 자사몰(내부 플랫폼)로 나누는{" "}
               <strong>'채널 분할' 전략</strong>으로 우회했습니다. 그 결과 단{" "}
               <strong>4회 방송으로 약 3,900만 원</strong>의 매출을 달성하며 비즈니스 가능성을
@@ -265,7 +267,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
             { k: "프로젝트 기간", v: "2021.06 ~ 2021.07 (1개월, 시범 운영)" },
             { k: "담당 역할", v: "운영 기획, 채널 플로우(유튜브+자사몰) 설계, 방송 편성 전략 수립" },
             { k: "팀 구성", v: "전략기획 2명, MD 1명, 개발 1명, 디자인 1명" },
-            { k: "기여도", v: "기획 50% (실행 협업 리드)" },
+            { k: "기여도", v: "기획 50%" },
           ]}
         />
         <div className="sub-project__section">
@@ -279,7 +281,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
               },
               {
                 k: "인프라·채널 제약",
-                v: "자체 스트리밍 인프라 구축은 과한 투자였고 네이버 등 외부 라이브 채널은 해당 채널 안에서만 구매 전환이 강제됨",
+                v: "자체 스트리밍 인프라 구축 불가, 네이버 등 외부 라이브 채널은 해당 채널에서 구매 전환 필요",
               },
             ]}
           />
@@ -303,7 +305,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
               { k: "타겟", v: "인천 시민 복지몰 주 고객층인 4050 여성" },
               {
                 k: "편성",
-                v: "일요일 저녁 7~9시 (1부 메인 상품 · 2부 서브 상품) — 평일보다 주말 오후 이용 비율이 높고 외부활동이 많은 토요일은 제외해 선정",
+                v: "일요일 저녁 7시~9시로 선정 — 평일보다 주말 오후 이용 비율이 높고, 외부 활동이 줄어 집에 머무는 시청자가 많은 시간대",
               },
             ]}
           />
@@ -315,7 +317,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
         variant="parchment"
         className="export-break-before"
         eyebrow={sec("mypage").eyebrow ?? "PROJECT 04"}
-        title={sec("mypage").title ?? "복지플랫폼 마이페이지 개편: UX/IA 재설계로 관련 문의 0건 달성"}
+        title={sec("mypage").title ?? "복지플랫폼 마이페이지 개편: UX/IA 재설계로 관련 문의 0건 수렴"}
         subcopy={
           sec("mypage").subcopy ?? (
             <>
@@ -324,7 +326,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
               <strong>UI/UX 접근성 문제로 재정의</strong>하고, 12개 주요 커머스 플랫폼의 패턴을 분석해
               사용자가 묻기 전에 직관적으로 확인(상단 요약, 상세 히스토리, 메뉴 통폐합)할 수 있는 구조로
               마이페이지를 재설계했습니다. 그 결과 <strong>주 1~3회</strong> 꾸준히 발생하던 포인트 관련
-              문의를 <strong>런칭 후 0건</strong>으로 근절했습니다.
+              문의가 <strong>런칭 후 0건</strong>에 수렴했습니다.
             </>
           )
         }
@@ -344,7 +346,7 @@ export default function SubProjects({ variant }: { variant?: Variant }) {
               { k: "현상", v: "포인트가 모바일 웹에서만 노출 → 앱 위주 사용자는 확인 불가" },
               {
                 k: "진짜 문제",
-                v: "① 언제, 왜 지급·회수되었는지 ② 언제, 왜 사용했는지 (잔액만이 아니라 히스토리 수요 확인)",
+                v: "① 지급·회수 시점 ② 사용 히스토리 등 (잔액뿐 아니라 상세 내역에 대한 수요 확인)",
               },
             ]}
           />

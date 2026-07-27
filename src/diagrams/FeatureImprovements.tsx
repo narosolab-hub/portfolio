@@ -22,7 +22,7 @@ const NEEDS_ROWS = [
   {
     aspect: "거래처/운영팀",
     before: "품절 상품 재입고 유선 문의",
-    after: "재고 0→발생 시 SMS 자동 안내",
+    after: "재고 0→발생 시 알림톡 자동 발송",
   },
   {
     aspect: "거래처/공급사",

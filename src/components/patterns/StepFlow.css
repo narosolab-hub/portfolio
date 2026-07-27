@@ -38,7 +38,9 @@
 }
 
 .step-flow__step-label {
-  font-size: 14px;
+  /* 스텝 라벨이 한 줄에 떨어지도록 살짝 축소 + 자간 축소 */
+  font-size: 13px;
+  letter-spacing: -0.02em;
   font-weight: 600;
   color: var(--color-ink);
 }
