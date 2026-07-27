@@ -48,7 +48,7 @@ export interface Variant {
 
   /** Hero(첫 화면) 문구 override — 바꾸고 싶은 줄만 적으면 됨 */
   hero?: {
-    /** 상단 작은 라벨. 기본 "프로덕트 기획자 PORTFOLIO" */
+    /** 상단 작은 라벨. 기본 "프로덕트 기획자" */
     eyebrow?: string;
     /** 큰 제목의 앞부분. 기본 "복잡한 운영 구조를 기획으로 풀어내는" */
     lead?: string;
@@ -58,12 +58,21 @@ export interface Variant {
     tail?: string;
     /** 제목 아래 소개 문단 */
     body?: string;
+    /** 헤드라인 옆에 띄울 상징 이미지(아바타/캐릭터)의 import된 URL. 생략 시 미표시 */
+    image?: string;
   };
 
   /** About 섹션 문단 override — 문단 배열로 넣으면 기본 3문단을 통째로 대체 */
   about?: {
     paragraphs?: string[];
   };
+
+  /**
+   * Experience(업무 경험) 목록 override — 배열을 주면 Home 기본 EXPERIENCES를
+   * 통째로 대체합니다(about.paragraphs와 동일한 방식). 공고별로 강조할 경력·
+   * 불릿을 상세히 재구성할 때 사용. 생략하면 기본 목록이 그대로 나옵니다.
+   */
+  experience?: ExperienceEntry[];
 
   /**
    * How I Work(일하는 방식) 카드 override.
@@ -85,6 +94,20 @@ export interface Variant {
 
   /** 케이스 스터디 페이지(서브 프로젝트) 문구 override — 공고별 톤 조정용 */
   subPage?: CasePageOverride;
+}
+
+/** Experience 한 줄(회사 한 곳)의 데이터. Home의 EXPERIENCES 항목과 동일한 형태 */
+export interface ExperienceEntry {
+  /** 회사명 */
+  company: string;
+  /** 재직 기간 (예: "2024.08 — 현재") */
+  period: string;
+  /** 기간 길이 (예: "1년 11개월") */
+  duration: string;
+  /** 팀·직급·직무 한 줄 (예: "플랫폼기획팀 · 대리 · 플랫폼 기획/PM") */
+  role: string;
+  /** 주요 성과·업무 불릿 */
+  bullets: string[];
 }
 
 /**

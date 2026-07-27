@@ -18,6 +18,42 @@
   color: var(--color-primary);
 }
 
+/* Hero: 왼쪽 상징 이미지(아바타) + 오른쪽 헤드라인 (variant.hero.image 있을 때만) */
+.hero-lockup--with-image {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 32px;
+}
+.hero-lockup__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* hero 안에서는 전역 eyebrow의 -22px 붙임을 풀고 제목과 적당한 여백을 준다 */
+.hero-lockup__text .tile__eyebrow {
+  margin-bottom: 14px;
+}
+.hero-lockup__image {
+  flex-shrink: 0;
+  width: 160px;
+  height: auto;
+  /* 캐릭터가 배경 위에서 살짝 떠 보이도록 부드러운 그림자 */
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.12));
+}
+/* 좁은 화면: 이미지를 헤드라인 위로 올리고 크기 축소 */
+@media (max-width: 640px) {
+  .hero-lockup--with-image {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .hero-lockup__image {
+    width: 112px;
+  }
+}
+
 /* Tighten the section padding where two light tiles sit back to back */
 .tile--compact-bottom {
   padding-bottom: 24px;
@@ -53,8 +89,10 @@
 }
 .hero-project-btn__desc {
   color: var(--color-ink-muted-48);
-  /* 긴 설명 가독성 확보 */
-  line-height: 1.6;
+  /* 설명이 한 줄로 떨어지도록 본문(14px)보다 살짝 작게 + 자간 축소 */
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
 }
 .hero-project-btn:hover {
   background: var(--color-canvas-parchment);

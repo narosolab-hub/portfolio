@@ -6,6 +6,7 @@ import { ToolIcon } from "../components/ToolIcon";
 import structureEmoji from "../assets/competency-emoji/structure.png";
 import alignEmoji from "../assets/competency-emoji/align.png";
 import aiEmoji from "../assets/competency-emoji/ai.png";
+import meMemoji from "../assets/me-memoji.png";
 import { DEFAULT_ORDER, type SectionId, type Variant } from "../variants";
 import { useIsExport } from "../export-mode";
 import "./Home.css";
@@ -15,11 +16,12 @@ import "./Home.css";
 // 아래 About 섹션이 전담합니다. variant가 hero.body를 넣으면 그때만 문단이
 // 나타납니다(예: focus-media).
 const HERO_DEFAULT = {
-  eyebrow: "프로덕트 기획자 PORTFOLIO",
+  eyebrow: "프로덕트 기획자",
   lead: "복잡한 운영 구조를 기획으로 풀어내는",
   accent: "PM 박건주",
   tail: "입니다.",
   body: undefined as string | undefined,
+  image: meMemoji as string | undefined,
 };
 
 const PROJECTS_DEFAULT = {
@@ -82,17 +84,17 @@ const EXPERIENCES = [
 const COMPETENCIES = [
   {
     title: "문제를 구조로 다시 정의합니다",
-    body: "요구사항을 그대로 옮기지 않습니다. 왜 이 문제가 생겼는지와 그 뒤에 숨은 구조·리스크를 먼저 보고, 흐름·예외·판단 기준으로 쪼개 팀이 같은 그림으로 논의할 수 있게 정리합니다.",
+    body: "표면적인 요구사항 이면의 근본 원인을 파악하고, 복잡한 비즈니스 로직을 명확한 정책과 흐름으로 분해하여 불확실성을 해소합니다.",
     emoji: structureEmoji,
   },
   {
     title: "이해관계자와 조율합니다",
-    body: "경영진·거래처·운영·재무의 엇갈리는 요구를 어떤 기준으로 나누고 결정할지 고민합니다. 의사결정 근거와 리스크를 문서로 남겨 기준이 나중에 흔들리지 않게 합니다.",
+    body: "상충하는 요구사항 속에서 객관적인 기준으로 우선순위를 정하고, 의사결정 근거를 투명하게 문서화하여 합의를 이끌어냅니다.",
     emoji: alignEmoji,
   },
   {
-    title: "AI를 적극 활용합니다",
-    body: "도구가 없다고 기다리지 않습니다. 반복 업무나 데이터 정합성 문제를 발견하면 AI·노코드 툴로 실무에 바로 쓰는 자동화를 직접 만듭니다.",
+    title: "직접 만들어 빠르게 실행합니다",
+    body: "리소스 제약을 핑계 삼지 않고, AI 등을 활용해 업무 병목을 해결하는 도구를 직접 구축하여 빠르게 가설을 검증합니다.",
     emoji: aiEmoji,
   },
 ];
@@ -109,6 +111,20 @@ const TOOLS_SECONDARY = [
   { id: "figma",      label: "Figma",      desc: "화면 설계·검토 · 레퍼런스 분석" },
 ];
 
+// About 문단 안의 `**강조 문장**` 표기를 볼드(<strong>)로 렌더. 변형 파일(.ts)에서
+// JSX를 못 쓰므로, 문자열에 마커만 넣으면 여기서 강조 조각으로 변환한다.
+function renderEmphasis(text: string) {
+  return text.split("**").map((part, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} style={{ color: "var(--color-ink)", fontWeight: 600 }}>
+        {part}
+      </strong>
+    ) : (
+      part
+    ),
+  );
+}
+
 export default function Home({ variant }: { variant?: Variant }) {
   // 기본 문구에 variant override를 병합
   const hero = { ...HERO_DEFAULT, ...variant?.hero };
@@ -117,6 +133,8 @@ export default function Home({ variant }: { variant?: Variant }) {
     sub: { ...PROJECTS_DEFAULT.sub, ...variant?.projects?.sub },
   };
   const aboutParas = variant?.about?.paragraphs ?? ABOUT_DEFAULT;
+  // 경력 목록: variant가 experience를 주면 통째로 대체, 없으면 기본 목록
+  const experiences = variant?.experience ?? EXPERIENCES;
   // How I Work 카드: 기본 3장에 variant가 지정한 인덱스별 title/body만 덮어씀
   const competencies = COMPETENCIES.map((c, i) => ({
     ...c,
@@ -144,18 +162,25 @@ export default function Home({ variant }: { variant?: Variant }) {
         variant="light"
         className={heroProjAdjacent ? "tile--compact-bottom" : undefined}
       >
-        <p className="tile__eyebrow text-caption-strong">{hero.eyebrow}</p>
-        <h1 className="hero-headline" style={{ maxWidth: 640 }}>
-          <span className="hero-headline__lead">{hero.lead}</span>
-          <br />
-          <span className="hero-accent">{hero.accent}</span>
-          {hero.tail}
-        </h1>
-        {hero.body && (
-          <p className="text-body" style={{ color: "var(--color-ink-muted-80)", maxWidth: 640, marginTop: 24 }}>
-            {hero.body}
-          </p>
-        )}
+        <div className={hero.image ? "hero-lockup hero-lockup--with-image" : "hero-lockup"}>
+          {hero.image && (
+            <img className="hero-lockup__image" src={hero.image} alt="" aria-hidden="true" />
+          )}
+          <div className="hero-lockup__text">
+            <p className="tile__eyebrow text-caption-strong">{hero.eyebrow}</p>
+            <h1 className="hero-headline" style={{ maxWidth: 640 }}>
+              <span className="hero-headline__lead">{hero.lead}</span>
+              <br />
+              <span className="hero-accent">{hero.accent}</span>
+              {hero.tail}
+            </h1>
+            {hero.body && (
+              <p className="text-body" style={{ color: "var(--color-ink-muted-80)", maxWidth: 640, marginTop: 24 }}>
+                {hero.body}
+              </p>
+            )}
+          </div>
+        </div>
       </Tile>
     ),
 
@@ -200,7 +225,7 @@ export default function Home({ variant }: { variant?: Variant }) {
                 className="text-body"
                 style={{ color: "var(--color-ink-muted-80)", marginTop: i === 0 ? 0 : 14 }}
               >
-                {para}
+                {renderEmphasis(para)}
               </p>
             ))}
           </div>
@@ -234,7 +259,7 @@ export default function Home({ variant }: { variant?: Variant }) {
     experience: () => (
       <Tile variant="light" className="export-break-before" eyebrow="EXPERIENCE">
         <div className="exp-list">
-          {EXPERIENCES.map((e) => (
+          {experiences.map((e) => (
             <div className="exp-row" key={e.company}>
               <div className="exp-meta">
                 <span className="text-caption" style={{ color: "var(--color-ink-muted-48)" }}>
@@ -280,14 +305,22 @@ export default function Home({ variant }: { variant?: Variant }) {
           <div className="exp-row">
             <div className="exp-meta">
               <span className="text-caption" style={{ color: "var(--color-ink-muted-48)" }}>
-                2023.04
+                2023.04 — 2023.07
               </span>
             </div>
             <div className="exp-content">
               <p className="text-body-strong">코드스테이츠</p>
               <p className="text-caption" style={{ color: "var(--color-ink-muted-80)" }}>
-                프로덕트매니지먼트 부트캠프 수강
+                Product Management 부트캠프 수료
               </p>
+              <ul className="exp-bullets text-caption">
+                <li>
+                  PM/PO 직무 전환을 목표로 UX 리서치, 요구사항 정의, BM·경쟁사 분석 등 서비스 기획 전반을 학습
+                </li>
+                <li>
+                  팀 프로젝트로 PRD·와이어프레임 등 기획 산출물을 작성하고 Notion·Figma 협업 프로세스를 실습
+                </li>
+              </ul>
             </div>
           </div>
         </div>
