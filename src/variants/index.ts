@@ -145,6 +145,7 @@ export const VARIANT_LOADERS: Record<
   "focus-media": () => import("./focus-media"),
   "bgzt": () => import("./bgzt"),
   "toss-place": () => import("./toss-place"),
+  "tosspayments": () => import("./tosspayments"),
 };
 
 /** 해당 slug가 등록된 공고 버전인지 (데이터 청크 로드 없이 즉시 판별) */
@@ -160,4 +161,6 @@ export function isVariantSlug(slug: string): boolean {
 export const VARIANT_FAVICONS: Record<string, string> = {
   "bgzt": "/favicon-bgzt.png",
   "toss-place": "/favicon-toss-place.png",
+  // 토스페이먼츠도 같은 토스 브랜드 심볼을 재사용
+  "tosspayments": "/favicon-toss-place.png",
 };
