@@ -174,27 +174,10 @@
   }
 }
 .competency-card {
-  position: relative;
   background: var(--color-canvas);
   border: 1px solid var(--color-hairline);
   border-radius: var(--radius-md);
   padding: 32px;
-  overflow: hidden;
-}
-.competency-card__emoji {
-  position: absolute;
-  right: -20px;
-  bottom: -20px;
-  width: 140px;
-  height: 140px;
-  object-fit: contain;
-  opacity: 0.08;
-  pointer-events: none;
-  z-index: 0;
-}
-.competency-card > p {
-  position: relative;
-  z-index: 1;
 }
 /* EXPERIENCE 성과 불릿 (Notion 구조) */
 .exp-bullets {

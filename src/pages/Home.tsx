@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 import GlobalNav from "../components/GlobalNav";
 import Tile from "../components/Tile";
 import { ToolIcon } from "../components/ToolIcon";
-import structureEmoji from "../assets/competency-emoji/structure.png";
-import alignEmoji from "../assets/competency-emoji/align.png";
-import aiEmoji from "../assets/competency-emoji/ai.png";
 import meMemoji from "../assets/me-memoji.png";
 import { DEFAULT_ORDER, type SectionId, type Variant } from "../variants";
 import { useIsExport } from "../export-mode";
@@ -70,32 +67,20 @@ const EXPERIENCES = [
       "라이브커머스 4회로 약 3,900만 원 매출, 마이페이지 IA·UX 개편으로 관련 문의 0건 달성",
     ],
   },
-  {
-    company: "주식회사 공팔리터",
-    period: "2020.05 — 2020.11",
-    duration: "7개월",
-    role: "마케팅·영업팀 · 사원(계약직)",
-    bullets: [
-      "리뷰 마케팅 플랫폼 신규 광고주 발굴·캠페인 운영으로 개인 매출 3,000만 원 달성",
-    ],
-  },
 ];
 
 const COMPETENCIES = [
   {
     title: "문제를 구조로 다시 정의합니다",
     body: "표면적인 요구사항 이면의 근본 원인을 파악하고, 복잡한 비즈니스 로직을 명확한 정책과 흐름으로 분해하여 불확실성을 해소합니다.",
-    emoji: structureEmoji,
   },
   {
     title: "이해관계자와 조율합니다",
     body: "상충하는 요구사항 속에서 객관적인 기준으로 우선순위를 정하고, 의사결정 근거를 투명하게 문서화하여 합의를 이끌어냅니다.",
-    emoji: alignEmoji,
   },
   {
     title: "직접 만들어 빠르게 실행합니다",
     body: "리소스 제약을 핑계 삼지 않고, AI 등을 활용해 업무 병목을 해결하는 도구를 직접 구축하여 빠르게 가설을 검증합니다.",
-    emoji: aiEmoji,
   },
 ];
 
@@ -246,7 +231,6 @@ export default function Home({ variant }: { variant?: Variant }) {
         <div className="competency-grid">
           {competencies.map((c) => (
             <div className="competency-card" key={c.title}>
-              <img className="competency-card__emoji" src={c.emoji} alt="" aria-hidden="true" />
               <p className="text-body-strong" style={{ color: "var(--color-primary)" }}>
                 {c.title}
               </p>
